@@ -35,7 +35,7 @@
     --font-display:'Space Grotesk', sans-serif;
     --font-body:'Inter', sans-serif;
     --font-mono:'JetBrains Mono', monospace;
-    --maxw: 1120px;
+    --maxw: 1340px; /* Mở rộng chiều ngang toàn trang lên 1340px cho thoáng */
   }
 
   *{ box-sizing:border-box; }
@@ -51,7 +51,6 @@
     overflow-x:clip;
   }
 
-  /* graph-paper grid, referencing the BI canvas this content lives in */
   body::before{
     content:"";
     position:fixed;
@@ -241,7 +240,7 @@
     pointer-events:none; z-index:0;
   }
   .hero-top-row{ display:flex; gap:40px; align-items:flex-start; }
-  .hero-top{ display:flex; flex-direction:column; gap:22px; max-width:640px; flex:1 1 auto; min-width:0; }
+  .hero-top{ display:flex; flex-direction:column; gap:26px; max-width:100%; flex:1 1 auto; min-width:0; width:100%; }
   .profile-card-body{ padding:24px; text-align:left; }
   .hero h1{
     font-size:clamp(34px, 5vw, 54px);
@@ -252,7 +251,7 @@
     font-family:var(--font-mono); font-size:15px; color:var(--teal); font-weight:500;
   }
   .hero-desc{
-    color:var(--text-muted); font-size:16.5px; max-width:560px;
+    color:var(--text-muted); font-size:16.5px; max-width:100%;
   }
   .hero-cta{ display:flex; gap:12px; flex-wrap:wrap; margin-top:4px; }
   .hero-meta{
@@ -262,26 +261,25 @@
   .hero-meta span{ display:flex; align-items:center; gap:6px; }
   .hero-meta svg{ width:13px; height:13px; opacity:0.8; }
 
-  /* Signature element: a live pipeline diagram (ERP -> Sheets -> Power BI -> result) */
+  /* End-to-End Pipeline: Trải full 100% không bị thanh trược ngang */
   .pipeline-signature{ margin-top:52px; }
   .pipe-track{
-    display:flex; align-items:center; gap:0; flex-wrap:nowrap;
+    display:flex; align-items:stretch; gap:0; flex-wrap:nowrap; width:100%; overflow:visible;
     background:var(--bg-panel); border:1px solid var(--border); border-radius:14px;
-    padding:22px 26px; box-shadow:var(--shadow); overflow:hidden;
+    padding:22px 20px; box-shadow:var(--shadow);
   }
   .pipe-node{
     background:var(--bg-panel-alt); border:1.5px solid var(--border-hi); border-radius:10px;
-    padding:11px 16px; font-family:var(--font-mono); font-size:12.5px; font-weight:600; color:var(--text);
-    white-space:nowrap; display:flex; flex-direction:column; gap:2px; flex:none;
+    padding:12px 10px; font-family:var(--font-mono); font-size:12px; font-weight:600; color:var(--text);
+    white-space:normal; display:flex; flex-direction:column; gap:5px; flex:1 1 0; min-width:0; text-align:center;
   }
   .pipe-node-output{ background:var(--blue-dim); border-color:var(--blue); color:var(--blue); }
-  .pipe-node-sub{ font-size:10px; font-weight:500; color:var(--text-dim); }
-  .pipe-node-output .pipe-node-sub{ color:var(--blue); opacity:0.75; }
+  .pipe-node-sub{ font-size:10.5px; font-weight:500; color:var(--text-dim); line-height:1.35; }
+  .pipe-node-output .pipe-node-sub{ color:var(--blue); opacity:0.85; }
   .pipe-connector{
-    flex:1; min-width:28px; height:3px; margin:0 10px; border-radius:2px; flex-shrink:1;
+    flex:0 0 30px; min-width:20px; max-width:40px; height:3px; margin:auto; border-radius:2px;
     background-image: repeating-linear-gradient(90deg, var(--blue) 0 8px, transparent 8px 16px);
-    background-size:32px 3px;
-    animation: pipeFlow 1.1s linear infinite;
+    background-size:32px 3px; animation: pipeFlow 1.1s linear infinite;
   }
   .pipe-connector-thick{
     height:4px;
@@ -289,10 +287,17 @@
     animation: pipeFlow 0.9s linear infinite;
   }
   @keyframes pipeFlow{ from{ background-position:0 0; } to{ background-position:-32px 0; } }
-  @keyframes pipeFlowVertical{ from{ background-position:0 0; } to{ background-position:0 -32px; } }
-  .pipe-result{ display:flex; flex-direction:column; flex:none; padding-left:6px; }
-  .pipe-result-value{ font-family:var(--font-mono); font-size:36px; font-weight:700; color:var(--blue); line-height:1; }
-  .pipe-result-label{ font-size:11.5px; color:var(--text-muted); margin-top:4px; white-space:nowrap; }
+  
+  /* Business Outcome Flow */
+  .pipe-result-flow{
+    display:flex; align-items:center; justify-content:center; gap:0; flex-wrap:wrap;
+    margin-top:24px; background:var(--bg-panel-alt); border:1px solid var(--border-hi);
+    border-radius:14px; padding:24px;
+  }
+  .pipe-result-step{ display:flex; flex-direction:column; align-items:center; gap:6px; padding: 0 16px; text-align:center; }
+  .pipe-result-value{ font-family:var(--font-mono); font-size:32px; font-weight:700; color:var(--teal); line-height:1; text-shadow:0 0 20px rgba(45,212,191,.34); }
+  .pipe-result-label{ font-size:13px; color:var(--text); font-weight:600; }
+  .pipe-arrow{ color:var(--blue); font-size:20px; font-weight:700; padding: 0 12px; }
 
   .hero-creds{
     margin-top:16px; display:flex; flex-wrap:wrap; gap:8px; align-items:center;
@@ -306,7 +311,46 @@
   .c-violet{ color:var(--violet) !important; }
   .c-rose{ color:var(--rose) !important; }
 
-  /* Stage divider — a small pipeline junction connecting each section */
+  /* KPI Cards full width */
+  .hero-kpis{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+    gap:14px; margin-top:30px; margin-bottom:8px; width:100%;
+  }
+  .hero-kpi{
+    background:var(--bg-panel); border:1px solid var(--border); padding:16px 14px;
+    border-radius:10px; text-align:center;
+    transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .hero-kpi:hover{
+    transform:translateY(-3px); border-color:var(--border-hi); box-shadow:var(--shadow);
+  }
+  .hero-kpi.is-impact{ border-color: rgba(45,212,191,0.4); background: linear-gradient(145deg, rgba(45,212,191,0.05), var(--bg-panel)); }
+  .hero-kpi.is-impact .hero-kpi-value{ color: var(--teal); text-shadow: 0 0 18px rgba(45,212,191,0.3); }
+  
+  .hero-kpi.is-tech{ border-color: rgba(96,165,250,0.4); background: linear-gradient(145deg, rgba(96,165,250,0.05), var(--bg-panel)); }
+  .hero-kpi.is-tech .hero-kpi-value{ color: var(--blue); text-shadow: 0 0 18px rgba(96,165,250,0.3); }
+  
+  .hero-kpi.is-neutral .hero-kpi-value{ color: var(--text); }
+  
+  .hero-kpi-value{
+    font-family:var(--font-display); font-size:26px; font-weight:700; line-height:1;
+  }
+  .hero-kpi-label{
+    font-size:11px; color:var(--text-muted); font-family:var(--font-mono);
+    margin-top:8px; display:block; letter-spacing:0.02em;
+  }
+
+  .about-stack span{
+    cursor: default;
+    transition: all .2s ease !important;
+  }
+  .about-stack span:hover{
+    background: rgba(96,165,250,0.2) !important;
+    border-color: var(--blue) !important;
+    color: var(--text) !important;
+    transform: translateY(-1px);
+  }
+
   .stage-divider{ display:flex; align-items:center; max-width:var(--maxw); margin:0 auto; padding:0 24px; }
   .stage-divider-line{ flex:1; height:1px; background:var(--border); }
   .stage-divider-node{ width:6px; height:6px; border-radius:50%; background:var(--blue); margin:0 12px; flex:none; opacity:0.55; }
@@ -325,9 +369,7 @@
   .section-sub{ color:var(--text-muted); font-size:14.5px; max-width:660px; margin-top:10px; }
 
   /* ---------- ABOUT ---------- */
-  .about-grid{
-    display:flex;
-  }
+  .about-grid{ display:flex; }
   .profile-card{
     max-width:320px; width:300px; flex:none;
     background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius);
@@ -691,15 +733,6 @@
     .demo-kpis{ grid-template-columns:repeat(2, 1fr); }
     .demo-charts{ grid-template-columns:1fr; }
     .chart-group-grid{ grid-template-columns:1fr; }
-    .pipe-track{ flex-direction:column; align-items:flex-start; gap:2px; padding:20px; }
-    .pipe-node{ width:100%; }
-    .pipe-connector{
-      width:3px; height:26px; min-width:3px; margin:2px 0 2px 24px;
-      background-image: repeating-linear-gradient(180deg, var(--blue) 0 8px, transparent 8px 16px);
-      background-size:3px 32px; animation-name:pipeFlowVertical;
-    }
-    .pipe-connector-thick{ background-image: repeating-linear-gradient(180deg, var(--teal) 0 8px, transparent 8px 16px); }
-    .pipe-result{ padding-left:0; padding-top:6px; }
   }
   @media (max-width:720px){
     .nav-links{
@@ -826,6 +859,7 @@
           <svg class="nav-dropdown-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <ul class="nav-dropdown-menu">
+          <li><a href="#analytics-architecture">End-to-End Pipeline</a></li>
           <li><a href="#erp-system">Source Data</a></li>
           <li><a href="#business-process">Processes</a></li>
           <li><a href="#database-design">Database</a></li>
@@ -873,75 +907,50 @@
         <div class="hero-top">
           <div class="eyebrow">Business Intelligence  &amp; Data Analyst</div>
           <h1>Bui Tien Sang</h1>
-          <p class="hero-desc">I turn messy ERP data into SQL models and Power BI dashboards that leadership actually uses — <strong style="color:var(--text)">cutting manual reporting effort by over 90%</strong> and answering 20+ recurring business questions on sales, inventory, and project budgets. Before a single chart gets built, I trace every number back to its source table across a 43-table ERP, cleaning it with SQL (1NF unnesting, JSON parsing) — because if leadership can't explain why a KPI moved, the dashboard has failed, no matter how polished it looks.</p>
+          <p class="hero-desc">I design enterprise ERP databases, engineer SQL analytical models in BigQuery, and build executive Power BI dashboards that solve real business problems — reducing manual reporting by over 90%. From 1NF normalization and star schema design to trusted KPI pipelines, this portfolio documents the full architecture connecting operational data to strategic decisions.</p>
 
           <div class="about-stack" aria-label="Core tools" style="margin:0;">
             <span>Power BI</span><span>DAX</span><span>Advanced SQL</span><span>BigQuery</span><span>Data Modeling</span>
           </div>
 
           <!-- KPI Executive Metric Cards Row in Hero -->
-          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:12px; margin:8px 0 16px 0;">
-            <div style="background:var(--bg-panel); border:1px solid var(--border); padding:12px 16px; border-radius:10px; text-align:center;">
-              <div style="font-family:var(--font-display); font-size:24px; font-weight:700; color:var(--teal);">-90%</div>
-              <div style="font-size:11px; color:var(--text-muted); font-family:var(--font-mono);">Manual Time Saved</div>
+          <div class="hero-kpis">
+            <div class="hero-kpi is-impact">
+              <div class="hero-kpi-value">-90%</div>
+              <div class="hero-kpi-label">Manual Reporting Reduction</div>
             </div>
-            <div style="background:var(--bg-panel); border:1px solid var(--border); padding:12px 16px; border-radius:10px; text-align:center;">
-              <div style="font-family:var(--font-display); font-size:24px; font-weight:700; color:var(--blue);">43</div>
-              <div style="font-size:11px; color:var(--text-muted); font-family:var(--font-mono);">ERP Tables Modeled</div>
+            <div class="hero-kpi is-tech">
+              <div class="hero-kpi-value">43</div>
+              <div class="hero-kpi-label">ERP Business Entities</div>
             </div>
-            <div style="background:var(--bg-panel); border:1px solid var(--border); padding:12px 16px; border-radius:10px; text-align:center;">
-              <div style="font-family:var(--font-display); font-size:24px; font-weight:700; color:var(--amber);">4</div>
-              <div style="font-size:11px; color:var(--text-muted); font-family:var(--font-mono);">Star Data Marts</div>
+            <div class="hero-kpi is-tech">
+              <div class="hero-kpi-value">80+</div>
+              <div class="hero-kpi-label">Relationships Designed</div>
             </div>
-            <div style="background:var(--bg-panel); border:1px solid var(--border); padding:12px 16px; border-radius:10px; text-align:center;">
-              <div style="font-family:var(--font-display); font-size:24px; font-weight:700; color:var(--violet);">20+</div>
-              <div style="font-size:11px; color:var(--text-muted); font-family:var(--font-mono);">Questions Answered</div>
+            <div class="hero-kpi is-tech">
+              <div class="hero-kpi-value">4</div>
+              <div class="hero-kpi-label">Enterprise Data Marts</div>
+            </div>
+            <div class="hero-kpi is-neutral">
+              <div class="hero-kpi-value">20+</div>
+              <div class="hero-kpi-label">Business Questions Solved</div>
+            </div>
+            <div class="hero-kpi is-neutral">
+              <div class="hero-kpi-value">4</div>
+              <div class="hero-kpi-label">Executive Dashboards</div>
             </div>
           </div>
 
           <div class="hero-cta">
-            <a href="#case-studies" class="btn btn-solid">See case studies</a>
+            <a href="#case-studies" class="btn btn-solid">See Case Studies</a>
+            <a href="#analytics-architecture" class="btn">Explore ERP Architecture</a>
             <a href="https://www.linkedin.com/in/sangdata/" target="_blank" rel="noopener" class="btn">Connect on LinkedIn ↗</a>
           </div>
           <div class="hero-meta">
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Dong Hung Thuan Ward, District 12, Ho Chi Minh City</span>
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> 0369 273 641</span>
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4V4z" opacity="0"/><path d="M3 6.5l9 6.5 9-6.5"/><rect x="3" y="5" width="18" height="14" rx="2"/></svg> <a href="mailto:buitiensang191@gmail.com" style="color:inherit;text-decoration:none">buitiensang191@gmail.com</a></span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg> English: Upper-Intermediate</span>
           </div>
-        </div>
-      </div>
-
-      <!-- signature: live pipeline diagram, mirroring the real ERP -> Sheets -> Power BI pipeline -->
-      <div class="pipeline-signature reveal" id="pipelineSignature">
-        <div class="pipe-track">
-          <div class="pipe-node">
-            <span class="pipe-node-label">Source systems</span>
-            <span class="pipe-node-sub">ERP · CRM · Operations</span>
-          </div>
-          <span class="pipe-connector" aria-hidden="true"></span>
-          <div class="pipe-node">
-            <span class="pipe-node-label">Data warehouse</span>
-            <span class="pipe-node-sub">BigQuery · governed data</span>
-          </div>
-          <span class="pipe-connector" aria-hidden="true"></span>
-          <div class="pipe-node">
-            <span class="pipe-node-label">Data marts</span>
-            <span class="pipe-node-sub">Star schema · KPI-ready</span>
-          </div>
-          <span class="pipe-connector" aria-hidden="true"></span>
-          <div class="pipe-node pipe-node-output">
-            <span class="pipe-node-label">Power BI dashboards</span>
-            <span class="pipe-node-sub">Sales · Finance · Operations</span>
-          </div>
-          <span class="pipe-connector pipe-connector-thick" aria-hidden="true"></span>
-          <div class="pipe-result">
-            <span class="pipe-result-value" id="pipeResultValue" data-target="90" data-suffix="%+">0%</span>
-            <span class="pipe-result-label">trusted metrics for decisions</span>
-          </div>
-        </div>
-        <div class="hero-creds">
-          <span>1+ yr BI experience</span><span class="hero-creds-dot">·</span><span>4 end-to-end reports shipped</span><span class="hero-creds-dot">·</span><span>20+ business questions solved</span>
         </div>
       </div>
     </div>
@@ -949,11 +958,100 @@
 
   <div class="stage-divider" aria-hidden="true"><span class="stage-divider-line"></span><span class="stage-divider-node"></span><span class="stage-divider-line"></span></div>
 
+  <!-- ANALYTICS ARCHITECTURE -->
+  <section id="analytics-architecture">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-index">01</span>
+        <div class="eyebrow">System Architecture</div>
+        <h2 class="section-title">End-to-End Analytics Architecture</h2>
+        <p class="section-sub">From operational ERP data to executive business decisions.</p>
+      </div>
+
+      <div class="reveal">
+        <div class="pipe-track">
+          <div class="pipe-node">
+            <span class="pipe-node-title">ERP / Google Sheets</span>
+            <span class="pipe-node-sub">Operational transactions</span>
+          </div>
+          <span class="pipe-connector" aria-hidden="true"></span>
+          <div class="pipe-node">
+            <span class="pipe-node-title">Apps Script</span>
+            <span class="pipe-node-sub">Business logic &amp; workflow</span>
+          </div>
+          <span class="pipe-connector" aria-hidden="true"></span>
+          <div class="pipe-node">
+            <span class="pipe-node-title">Normalized ERP</span>
+            <span class="pipe-node-sub">Relational data model</span>
+          </div>
+          <span class="pipe-connector" aria-hidden="true"></span>
+          <div class="pipe-node">
+            <span class="pipe-node-title">SQL Transformation</span>
+            <span class="pipe-node-sub">Cleaning · Modeling · KPI Logic</span>
+          </div>
+          <span class="pipe-connector" aria-hidden="true"></span>
+          <div class="pipe-node">
+            <span class="pipe-node-title">Enterprise Data Warehouse</span>
+            <span class="pipe-node-sub">BigQuery analytical storage</span>
+          </div>
+          <span class="pipe-connector" aria-hidden="true"></span>
+          <div class="pipe-node">
+            <span class="pipe-node-title">Star Schema</span>
+            <span class="pipe-node-sub">Fact &amp; Dimension Model</span>
+          </div>
+          <span class="pipe-connector" aria-hidden="true"></span>
+          <div class="pipe-node pipe-node-output">
+            <span class="pipe-node-title">Power BI</span>
+            <span class="pipe-node-sub">Executive Dashboards</span>
+          </div>
+          <span class="pipe-connector pipe-connector-thick" aria-hidden="true"></span>
+          <div class="pipe-node pipe-node-output">
+            <span class="pipe-node-title">Business Decisions</span>
+            <span class="pipe-node-sub">Operational &amp; Strategic</span>
+          </div>
+        </div>
+
+        <div class="pipe-result-flow">
+          <div class="pipe-result-step">
+            <span class="pipe-result-value">90%+</span>
+            <span class="pipe-result-label">Manual Reporting Reduction</span>
+          </div>
+          <span class="pipe-arrow">→</span>
+          <div class="pipe-result-step">
+            <span class="pipe-result-label" style="font-weight:700; color:var(--text); font-size:14px;">Trusted &amp; Standardized KPIs</span>
+          </div>
+          <span class="pipe-arrow">→</span>
+          <div class="pipe-result-step">
+            <span class="pipe-result-label" style="font-weight:700; color:var(--blue); font-size:14px;">Executive Dashboards</span>
+          </div>
+          <span class="pipe-arrow">→</span>
+          <div class="pipe-result-step">
+            <span class="pipe-result-label" style="font-weight:700; color:var(--teal); font-size:14px;">Business Decisions</span>
+          </div>
+        </div>
+
+        <!-- New Caption: Architecture Principles -->
+        <div style="margin-top: 24px; text-align: center;">
+          <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px;">Architecture Principles</div>
+          <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px;">
+            <span>• Separation of OLTP &amp; OLAP</span>
+            <span>• Single Source of Truth</span>
+            <span>• Centralized KPI Logic</span>
+            <span>• Reusable SQL Models</span>
+            <span>• Star Schema Design</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stage-divider" aria-hidden="true"><span class="stage-divider-line"></span><span class="stage-divider-node"></span><span class="stage-divider-line"></span></div>
+
   <!-- EXPERIENCE -->
   <section id="experience">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="section-index">01</span>
+        <span class="section-index">02</span>
         <div class="eyebrow">Work Log</div>
         <h2 class="section-title">Experience</h2>
       </div>
@@ -1017,10 +1115,10 @@
   <section id="erp-system">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="section-index">02</span>
+        <span class="section-index">03</span>
         <div class="eyebrow">Enterprise Architecture</div>
-        <h2 class="section-title">Understanding the Source ERP</h2>
-        <p class="section-sub">Primary Question Answered: <strong>What data does the ERP actually produce, and how does it fit together?</strong><br>Reverse engineered from 43 relational table in the source of truth behind every dashboard in this portfolio. The platform connects Commercial Sales, Structural Engineering, Global Supply Chain, Freight Logistics, and Financial Expenses.</p>
+        <h2 class="section-title">Problem Statement &amp; Source ERP</h2>
+        <p class="section-sub"><strong>Problem:</strong> Operational data was scattered across isolated silos with no analytical layer. Leadership lacked trusted KPIs.<br><strong>Solution:</strong> Reverse engineered the 43-table source ERP to build a governed BigQuery Data Warehouse. The platform connects Commercial Sales, Structural Engineering, Global Supply Chain, Freight Logistics, and Financial Expenses.</p>
       </div>
 
       <div class="arch-grid reveal">
@@ -1093,7 +1191,7 @@
   <section id="business-process">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="section-index">03</span>
+        <span class="section-index">04</span>
         <div class="eyebrow">Operations &amp; Workflows</div>
         <h2 class="section-title">Business Process Lifecycle</h2>
         <p class="section-sub">Primary Question Answered: <strong>How does the company operate?</strong><br>End-to-end operational handoffs connecting commercial sales, engineering estimates, global logistics, and financial disbursements.</p>
@@ -1152,7 +1250,7 @@
   <section id="database-design">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="section-index">04</span>
+        <span class="section-index">05</span>
         <div class="eyebrow">Relational Data Architecture</div>
         <h2 class="section-title">Database Design &amp; Data Model</h2>
         <p class="section-sub">Primary Question Answered: <strong>How is business data modeled?</strong><br>3NF relational core database schema featuring surrogate primary keys, explicit foreign keys, and controlled point-in-time denormalization.</p>
@@ -1208,7 +1306,7 @@
   <section id="data-warehouse">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="section-index">05</span>
+        <span class="section-index">06</span>
         <div class="eyebrow">Enterprise Data Platform</div>
         <h2 class="section-title">BigQuery Data Warehouse &amp; Data Marts</h2>
         <p class="section-sub">Primary Question Answered: <strong>How is analytics data organized?</strong><br>Medallion Data Warehouse architecture converting raw operational tables into 4 Star-Schema Data Marts for BI reporting. Refreshed daily via a scheduled BigQuery &rarr; Power BI pipeline (staging-layer detail in Governance &amp; Roadmap).</p>
@@ -1264,7 +1362,7 @@
   <section id="case-studies">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="section-index">06</span>
+        <span class="section-index">07</span>
         <div class="eyebrow">Proof Of Work</div>
         <h2 class="section-title">Case Studies &amp; Live Dashboards</h2>
         <p class="section-sub">4 real-world case studies extracted directly from Meridian's enterprise data. Pick a project below to see the full journey — from the Business Problem, Data Landscape, and SQL Standardization, to the Data Mart, KPI Dashboard, and recommended Next Action.</p>
@@ -1393,7 +1491,7 @@
   <section id="sql-showcase">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="section-index">07</span>
+        <span class="section-index">08</span>
         <div class="eyebrow">Transformation Engineering</div>
         <h2 class="section-title">SQL Pipelines &amp; Advanced Mechanics</h2>
         <p class="section-sub">Primary Question Answered: <strong>How is raw data transformed?</strong><br>Production-grade BigQuery SQL transformations resolving 1NF normalization, JSON event parsing, currency regex scrubbing, and dynamic inventory aging math.</p>
@@ -1477,7 +1575,7 @@ SUM(b.quotation_value) OVER (
   <section id="dashboard-gallery">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="section-index">08</span>
+        <span class="section-index">09</span>
         <div class="eyebrow">Executive BI Visuals</div>
         <h2 class="section-title">Dashboard Gallery &amp; KPI Components</h2>
         <p class="section-sub">Primary Question Answered: <strong>How are KPIs visualized?</strong><br>Power BI semantic layout components converting governed BigQuery metrics into clear executive decision cards and interactive visual matrices.</p>
@@ -1549,9 +1647,9 @@ DIVIDE(
   <section id="technical-documentation">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="section-index">09</span>
+        <span class="section-index">10</span>
         <div class="eyebrow">Governance &amp; Roadmap</div>
-        <h2 class="section-title">Technical Documentation &amp; Governance</h2>
+        <h2 class="section-title">Governance &amp; Recommendations</h2>
         <p class="section-sub">Primary Question Answered: <strong>Why were these technical decisions made?</strong><br>Architecture rationale, data governance policies, and future improvements for enterprise scalability.</p>
       </div>
 
@@ -1592,9 +1690,10 @@ DIVIDE(
   <section id="skills">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="section-index">10</span>
+        <span class="section-index">11</span>
         <div class="eyebrow">Capability Matrix</div>
         <h2 class="section-title">Skills &amp; tools</h2>
+        <p class="section-sub">Capability matrix &amp; tools. English proficiency: Upper-Intermediate.</p>
       </div>
       <div class="skills-grid reveal">
         <div class="skill-group">
@@ -1647,7 +1746,7 @@ DIVIDE(
   <section id="certifications">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="section-index">11</span>
+        <span class="section-index">12</span>
         <div class="eyebrow">Records</div>
         <h2 class="section-title">Certifications &amp; education</h2>
       </div>
@@ -1685,7 +1784,7 @@ DIVIDE(
   <section id="hiring-manager-review">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="section-index">12</span>
+        <span class="section-index">13</span>
         <div class="eyebrow">Why Work With Me</div>
         <h2 class="section-title">Portfolio Highlights</h2>
         <p class="section-sub">What stands out when working with me — distilled from 4 case studies and a BigQuery Data Warehouse running live in production at Meridian.</p>
@@ -1743,7 +1842,7 @@ DIVIDE(
   <section id="contact">
     <div class="wrap">
       <div class="contact-panel reveal">
-        <span class="section-index" style="text-align:center; width:100%;">13</span>
+        <span class="section-index" style="text-align:center; width:100%;">14</span>
         <div class="eyebrow" style="justify-content:center">Get In Touch</div>
         <h2 style="margin-top:12px">Let's talk about your data</h2>
         <p>Open to Data Analyst / BI roles where reporting still eats up someone's week — happy to walk through how I'd approach it.</p>
@@ -1885,37 +1984,6 @@ DIVIDE(
 
   // reduced motion check
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Pipeline result count-up
-  const pipeResultEl = document.getElementById('pipeResultValue');
-  function animatePipeResult(){
-    const target = parseFloat(pipeResultEl.dataset.target);
-    const suffix = pipeResultEl.dataset.suffix || '';
-    if(prefersReduced){ pipeResultEl.textContent = target + suffix; return; }
-    let current = 0;
-    const duration = 1100;
-    const start = performance.now();
-    function step(ts){
-      const progress = Math.min((ts - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      current = target * eased;
-      pipeResultEl.textContent = Math.round(current) + suffix;
-      if(progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-  const pipelineSignature = document.getElementById('pipelineSignature');
-  let pipeAnimated = false;
-  const pipeObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting && !pipeAnimated){
-        pipeAnimated = true;
-        animatePipeResult();
-        pipeObserver.disconnect();
-      }
-    });
-  }, { threshold:0.3 });
-  pipeObserver.observe(pipelineSignature);
 
   // scroll reveal
   const revealEls = document.querySelectorAll('.reveal');
