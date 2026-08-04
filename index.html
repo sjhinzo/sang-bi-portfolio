@@ -1977,7 +1977,7 @@ DIVIDE(
       doc_eyebrow: "Governance & Roadmap", doc_title: "Governance & Recommendations", doc_sub: "Primary Question Answered: <strong>Why were these technical decisions made?</strong><br>Architecture rationale, data governance policies, and future improvements for enterprise scalability.",
       doc1_h: "Architecture Rationale & Technical Decisions", doc1_p1: "1. <strong>Medallion Data Warehouse Architecture:</strong> Isolates raw Excel/ERP ingested tables in BigQuery staging views before executing dimensional data mart transformations, protecting downstream Power BI reports from breaking schema changes.", doc1_p2: "2. <strong>One Big Table (OBT) Model for Warehouse & Projects:</strong> Combining inventory status, stock-in, stock-out, and project variance into a single 20-column view (`vw_meridian_obt_dashboard`) drastically reduces Power BI DAX complexity and join overhead for real-time dashboard rendering.", doc1_p3: "3. <strong>Data Quality Assertions:</strong> All date parsing executes via <code>SAFE.PARSE_DATE</code> to handle 4 legacy date string formats without runtime ETL pipeline crashes.",
       doc2_h: "Data Quality Checks", doc2_p1: "&bull; <strong>Duplicate detection:</strong> <code>QUALIFY ROW_NUMBER() OVER (PARTITION BY quotation_name ORDER BY quotation_created_date DESC) = 1</code> to collapse duplicate quotation exports before aggregation.", doc2_p2: "&bull; <strong>NULL handling:</strong> <code>COALESCE</code> chains on every measure field so a missing value shows as 0 in a KPI, not a broken chart or a silently dropped row.", doc2_p3: "&bull; <strong>Invalid / missing foreign keys:</strong> <code>LEFT JOIN</code> + <code>COALESCE(m.material_name, 'Undefined')</code> so orphaned records surface as \"Undefined\" in the dashboard instead of disappearing — a missing material shows up as a visible data-quality flag, not a silent gap in the total.", doc2_p4: "&bull; <strong>Business rule validation:</strong> Quotations with <code>status = '05. Stop'</code> or <code>'Deleted'</code> are explicitly excluded from funnel calculations so cancelled deals can't inflate — or deflate — the conversion rate.",
-      doc3_h: "KPI Definitions (excerpt)", doc_def: "Definition", doc_grain: "Grain", doc_kpi1: "Contracts Signed &divide; Quotations Sent, current period", doc_grain1: "Per quotation", doc_kpi2: "Material value with <code>aging_days &gt; 90</code> and no stock-out movement in the period", doc_grain2: "Per material, current snapshot", doc_kpi3: "(Actual Site Dispatch Cost &minus; Baseline Estimate) &divide; Baseline Estimate", doc_grain3: "Per project",
+      doc3_h: "KPI Definitions (excerpt)", doc_def: "Definition", doc_grain: "Độ hạt (Grain)", doc_kpi1: "Contracts Signed &divide; Quotations Sent, current period", doc_grain1: "Per quotation", doc_kpi2: "Material value with <code>aging_days &gt; 90</code> and no stock-out movement in the period", doc_grain2: "Per material, current snapshot", doc_kpi3: "(Actual Site Dispatch Cost &minus; Baseline Estimate) &divide; Baseline Estimate", doc_grain3: "Per project",
       doc4_h: "SQL Naming Standards", doc4_p: "<code>base_*</code> = cleaned staging view &middot; <code>fact_*</code> / <code>dim_*</code> = warehouse layer &middot; <code>vw_*</code> = BI-facing semantic view &middot; snake_case throughout, no reserved words, no ambiguous abbreviations.",
       doc5_h: "Future Improvements Roadmap", doc5_p1: "&bull; <strong>Proactive KPI Alerts:</strong> Push automated threshold alerts (e.g. dead stock &gt;90 days, project budget overrun) straight to the team instead of waiting for someone to open the dashboard.", doc5_p2: "&bull; <strong>Self-Service Expansion:</strong> Extend the Power BI semantic model so Sales and Project teams can build their own report views without waiting on a request queue.", doc5_p3: "&bull; <strong>Lightweight Forecasting:</strong> Add trend-line forecasting in Power BI/DAX for inventory reorder points and revenue run-rate — enough to support planning without over-engineering a full ML pipeline.",
       sk_eyebrow: "Capability Matrix", sk_title: "Skills & tools", sk_sub: "Capability matrix & tools. English — Reading (technical documentation) B2 · Writing (work email) B1 · Speaking A2–B1, self-taught.",
@@ -1990,7 +1990,7 @@ DIVIDE(
       hm3_t: "Measurable Results", hm3_d: "Reporting automation that cuts manual reporting time by over 90%, answering 20+ business questions for leadership every period.",
       hm4_t: "Clear, Easy-to-Follow Storytelling", hm4_d: "Every case study follows the same framework: Problem → Data → SQL → Solution → Dashboard → Next Action, so readers grasp it in minutes.",
       hm_ba: "Before / After", hm_before: "Before", hm_after: "After", hm_b1: "Manual Excel reporting, ~3 hrs/day", hm_a1: "<b>Power BI refresh pipeline, ~15 min/day (&minus;90%)</b>", hm_b2: "No inventory aging visibility", hm_a2: "<b>Dead stock identified and flagged: 145M+ VND</b>", hm_b3: "Sales pipeline health unclear", hm_a3: "<b>16.2% conversion tracked with stage-by-stage drop-off</b>",
-      ct_eyebrow: "Get In Touch", ct_title: "Let's talk about your data", ct_desc: "Open to Data Analyst / BI roles where reporting still eats up someone's week — happy to walk through how I'd approach it.", ct_email: "Email buitiensang191@gmail.com", ct_call: "Call 0369 273 641",
+      ct_eyebrow: "Get In Touch", ct_title: "Let's talk about your data", ct_desc: "Open to Data Analyst / BI roles where reporting still eats up someone's week — happy to walk through how I'd approach it.", ct_email: "Gửi email buitiensang191@gmail.com", ct_call: "Call 0369 273 641",
       footer: "Built with Power BI logic, shipped as HTML.",
       // Dynamic Case Study Texts
       dash_sales: "Commercial Funnel & Market Demand — Meridian Workspace", q_sales: "What % of quotations convert to signed contracts, and where in the funnel do we lose the most deals?", p_sales: "Deal, quotation, and contract data lived in isolated silos. Leadership lacked a unified view of funnel conversion (Lead → Quotation → Contract) and could not track market demand by product category.", d_sales: "Raw data from 5 tables: quotation, quotedetail, contract, client, product. Date fields had inconsistent string formats (mixed %d/%m/%Y), and opportunity status included cancelled/stopped records (05. Stop, Deleted) that needed cleaning.", s_sales: "A 3-layer Data Mart (Demand, Funnel, Outcome) connecting the sales process end-to-end, revealing a 16.2% quotation conversion rate and total signed contract value.", n_sales: "Auto-flag quotations stuck at \"Quotation Sent\" for more than 14 days to alert Sales to re-engage; prioritize marketing spend on the product category with the highest demand_value.",
@@ -2062,7 +2062,7 @@ DIVIDE(
       doc1_h: "Cơ sở Kiến trúc & Quyết định Kỹ thuật", doc1_p1: "1. <strong>Kiến trúc Kho Dữ Liệu Medallion:</strong> Cách ly bảng thô Excel/ERP đưa vào BigQuery staging views trước khi thực thi biến đổi data mart chiều, bảo vệ báo cáo Power BI hạ nguồn khỏi việc phá vỡ schema.", doc1_p2: "2. <strong>Mô hình One Big Table (OBT) cho Kho & Dự án:</strong> Kết hợp trạng thái tồn kho, stock-in, stock-out, và chênh lệch dự án vào view 20 cột duy nhất (`vw_meridian_obt_dashboard`) giảm mạnh độ phức tạp Power BI DAX và overhead join cho render dashboard thời gian thực.", doc1_p3: "3. <strong>Khai báo Chất lượng Dữ liệu:</strong> Mọi parse date thực thi qua <code>SAFE.PARSE_DATE</code> để xử lý 4 định dạng chuỗi date cũ mà không crash pipeline ETL runtime.",
       doc2_h: "Kiểm tra Chất lượng Dữ liệu", doc2_p1: "&bull; <strong>Phát hiện trùng lặp:</strong> <code>QUALIFY ROW_NUMBER() OVER (PARTITION BY quotation_name ORDER BY quotation_created_date DESC) = 1</code> để gộp xuất khẩu báo giá trùng trước khi tổng hợp.", doc2_p2: "&bull; <strong>Xử lý NULL:</strong> Chuỗi <code>COALESCE</code> trên mọi trường measure để giá trị thiếu hiển thị 0 trong KPI, không phải chart hỏng hay dòng bị bỏ âm thầm.", doc2_p3: "&bull; <strong>Khóa ngoại thiếu/hợp lệ:</strong> <code>LEFT JOIN</code> + <code>COALESCE(m.material_name, 'Undefined')</code> để bản ghi mồ côi hiển thị \"Undefined\" trong dashboard thay vì biến mất — vật tư thiếu hiển thị như cờ chất lượng dữ liệu nhìn thấy, không phải khoảng trống âm thầm.", doc2_p4: "&bull; <strong>Kiểm chứng quy tắc kinh doanh:</strong> Báo giá với <code>status = '05. Stop'</code> hoặc <code>'Deleted'</code> được loại trừ khỏi tính toán phễu để deal hủy không thể thổi phồng — hoặc giảm — tỷ lệ chuyển đổi.",
       doc3_h: "Định nghĩa KPI (trích xuất)", doc_def: "Định nghĩa", doc_grain: "Grain", doc_kpi1: "Hợp đồng Ký &divide; Báo giá Gửi, kỳ hiện tại", doc_grain1: "Mỗi báo giá", doc_kpi2: "Giá trị vật tư với <code>aging_days &gt; 90</code> và không có movement stock-out trong kỳ", doc_grain2: "Mỗi vật tư, snapshot hiện tại", doc_kpi3: "(Chi phí Điều động Hiện trường Thực tế &minus; Dự toán Cơ sở) &divide; Dự toán Cơ sở", doc_grain3: "Mỗi dự án",
-      doc4_h: "Tiêu chuẩn Đặt tên SQL", doc4_p: "<code>base_*</code> = cleaned staging view &middot; <code>fact_*</code> / <code>dim_*</code> = warehouse layer &middot; <code>vw_*</code> = BI-facing semantic view &middot; snake_case xuyên suốt, không từ khóa đặt trước, không viết tắt mơ hồ.",
+      doc4_h: "Tiêu chuẩn Đặt tên SQL", doc4_p: "<code>base_*</code> = view staging đã làm sạch &middot; <code>fact_*</code> / <code>dim_*</code> = tầng kho dữ liệu &middot; <code>vw_*</code> = view ngữ nghĩa cho BI &middot; snake_case xuyên suốt, không từ khóa đặt trước, không viết tắt mơ hồ.",
       doc5_h: "Lộ trình Cải tiến Tương lai", doc5_p1: "&bull; <strong>Cảnh báo KPI Chủ động:</strong> Đẩy cảnh báo ngưỡng tự động (VD chết kho &gt;90 ngày, vượt ngân sách dự án) thẳng đến team thay vì đợi ai đó mở dashboard.", doc5_p2: "&bull; <strong>Mở rộng Self-Service:</strong> Mở rộng mô hình ngữ nghĩa Power BI để team Sales và Project tự xây dựng view báo cáo mà không cần chờ hàng đợi yêu cầu.", doc5_p3: "&bull; <strong>Dự báo Nhẹ:</strong> Thêm dự báo đường xu hướng trong Power BI/DAX cho điểm đặt hàng lại tồn kho và revenue run-rate — đủ để hỗ trợ lập kế hoạch mà không over-engineer pipeline ML đầy đủ.",
       sk_eyebrow: "Ma trận Năng lực", sk_title: "Kỹ năng & công cụ", sk_sub: "Ma trận năng lực & công cụ. Tiếng Anh — Đọc hiểu tài liệu kỹ thuật B2 · Viết email công việc B1 · Giao tiếp A2–B1, tự học.",
       sk1: "BI & Trực quan hóa", sk1_1: "Mô hình hóa Dữ liệu", sk1_2: "Dashboard KPI", sk1_3: "Kể chuyện Dữ liệu", sk2: "Truy vấn & Dữ liệu", sk2_1: "SQL Nâng cao", sk2_2: "Window Functions", sk2_3: "Tối ưu Truy vấn", sk3: "Lập trình & Dự báo", sk3_1: "Dự báo Chuỗi thời gian", sk4: "Bảng tính", sk4_1: "Mảng Động", sk4_2: "Định dạng Điều kiện", sk5: "Tự động hóa & Hệ thống", sk5_1: "Tự động hóa Quy trình", sk6: "Quản trị & Chất lượng", sk6_1: "Quản trị Dữ liệu", sk6_2: "Giám sát Dữ liệu", sk6_3: "Kiểm soát Chất lượng Dữ liệu",
@@ -2313,7 +2313,56 @@ UNION ALL ... -- STOCK_IN, STOCK_OUT, PROJECT_VARIANCE`,
 
     const chartInstances = {};
 
+    
+    /* ===== Dịch nhãn biểu đồ sang tiếng Việt ===== */
+    const CHART_VN = {
+      // trục / dataset
+      'Quarter':'Quý','Sales Team':'Nhóm Sales','Contact Channel':'Kênh liên hệ','Region':'Khu vực',
+      'Month':'Tháng','Response Time':'Thời gian phản hồi','Project':'Dự án','Job Site':'Công trình',
+      'New Customers':'Khách hàng mới','Leads':'Lead','Conversion Rate (%)':'Tỷ lệ chuyển đổi (%)',
+      'Quotations':'Báo giá','New Accounts':'Tài khoản mới','Value (M VND)':'Giá trị (triệu VNĐ)',
+      'Usage Share (%)':'Tỷ trọng sử dụng (%)',
+      'Customer Count':'Số khách hàng','Account Count':'Số tài khoản','Lead Count':'Số lead',
+      'Stock-in Value':'Giá trị nhập','Stock-out Value':'Giá trị xuất','Dead Stock Value':'Giá trị hàng chết',
+      // nhãn danh mục
+      'Keep':'Giữ','New':'Mới','Potential':'Tiềm năng','No':'Không','Other':'Khác',
+      'Meridian Brand':'Thương hiệu Meridian','North Brand':'Thương hiệu Bắc','South Brand':'Thương hiệu Nam',
+      'Team A':'Nhóm A','Team B':'Nhóm B','Team C':'Nhóm C','Team D':'Nhóm D',
+      'New Project':'Dự án mới','Expansion':'Mở rộng','Renewal':'Gia hạn',
+      'Phone':'Điện thoại','Partner':'Đối tác',
+      'Architects':'Kiến trúc sư','Contractors':'Nhà thầu','Installers':'Đơn vị lắp đặt','Direct':'Trực tiếp',
+      'Quote Speed':'Tốc độ báo giá','Relationship':'Quan hệ','Due Diligence':'Thẩm định','Referral':'Giới thiệu',
+      'Southeast':'Đông Nam Bộ','Red River Delta':'Đồng bằng sông Hồng','Central Coast':'Duyên hải miền Trung',
+      'HCMC & Southeast':'TP.HCM & Đông Nam Bộ','Hanoi & North':'Hà Nội & miền Bắc','Central':'Miền Trung',
+      'Retail':'Bán lẻ','Hospitality':'Khách sạn – Nhà hàng','Office':'Văn phòng',
+      'Month 1':'Tháng 1','Month 2':'Tháng 2','Month 3':'Tháng 3','Month 4':'Tháng 4','Month 5':'Tháng 5',
+      'High':'Cao','Medium':'Trung bình','Low':'Thấp',
+      'No Budget':'Không có ngân sách','Went Silent':'Ngưng phản hồi','Still Nurturing':'Đang nuôi dưỡng',
+      '< 1 day':'< 1 ngày','1–3 days':'1–3 ngày','4–7 days':'4–7 ngày','> 7 days':'> 7 ngày',
+      'Membrane Surface':'Bề mặt màng','Equipment':'Thiết bị','Components':'Linh kiện',
+      'Project Alpha':'Dự án Alpha','Project Beta':'Dự án Beta','Project Gamma':'Dự án Gamma','Project Delta':'Dự án Delta',
+      'Healthy':'Bình thường','Watchlist':'Cần theo dõi','Warning':'Cảnh báo','Dead Stock':'Hàng chết',
+      'Site A':'Công trình A','Site B':'Công trình B','Site C':'Công trình C','Site D':'Công trình D'
+    };
+    function tL(v){
+      if(typeof v !== 'string') return v;
+      if(currentLang !== 'vn') return v;
+      return CHART_VN[v] || v;
+    }
+    function tChartConfig(cfg){
+      if(currentLang !== 'vn') return cfg;
+      var out = Object.assign({}, cfg);
+      if(Array.isArray(out.labels)) out.labels = out.labels.map(tL);
+      if(out.xLabel) out.xLabel = tL(out.xLabel);
+      if(out.yLabel) out.yLabel = tL(out.yLabel);
+      if(Array.isArray(out.datasets)) out.datasets = out.datasets.map(function(d){
+        return Object.assign({}, d, { label: tL(d.label) });
+      });
+      return out;
+    }
+
     function buildChart(canvasId, config){
+      config = tChartConfig(config);
       if(chartInstances[canvasId]){ chartInstances[canvasId].destroy(); }
       const canvas = document.getElementById(canvasId);
       const ctx = canvas.getContext('2d');
@@ -2423,7 +2472,7 @@ UNION ALL ... -- STOCK_IN, STOCK_OUT, PROJECT_VARIANCE`,
       if(document.getElementById('csSqlPreview')) document.getElementById('csSqlPreview').textContent = c.sqlPreview;
       if(document.getElementById('csNextAction')) document.getElementById('csNextAction').textContent = c.nextAction[currentLang];
       if(document.getElementById('csDashTitle')) document.getElementById('csDashTitle').textContent = c.dashTitle[currentLang];
-      if(document.getElementById('csUsedBy')) document.getElementById('csUsedBy').textContent = 'Used by: ' + c.usedBy[currentLang];
+      if(document.getElementById('csUsedBy')) document.getElementById('csUsedBy').textContent = (currentLang==='vn' ? 'Người dùng: ' : 'Used by: ') + c.usedBy[currentLang];
       renderKpis(c.kpis);
       renderChartsGrouped(c.charts);
     }
@@ -2509,6 +2558,71 @@ UNION ALL ... -- STOCK_IN, STOCK_OUT, PROJECT_VARIANCE`,
   document.addEventListener('click', function(e){
     if(e.target && e.target.closest && e.target.closest('.lang-btn')) setTimeout(labelTables, 80);
   });
+})();
+</script>
+
+<script>
+(function(){
+  var STATIC_VN = {
+    'Skip to content':'Chuyển đến nội dung',
+    'Dong Hung Thuan Ward, District 12, Ho Chi Minh City':'Phường Đông Hưng Thuận, Quận 12, TP.HCM',
+    '04/2025 — Present':'04/2025 — Hiện tại',
+    'Vietnam Academy of Science and Technology — Remote':'Viện Hàn lâm Khoa học và Công nghệ Việt Nam — Từ xa',
+    'Nguyen Tat Thanh University':'Trường Đại học Nguyễn Tất Thành',
+    /* thẻ mô tả kiến trúc — dịch được vì là diễn giải, không phải định danh */
+    '1:N Cardinality':'Quan hệ 1:N', '1NF Clean':'Chuẩn hoá 1NF', 'Line Items':'Dòng chi tiết',
+    'Agg Efficiency':'Hiệu quả tổng hợp', 'Historical Truth':'Dữ liệu tại thời điểm',
+    'Fast BI Queries':'Truy vấn BI nhanh', 'Zero Join Latency':'Không độ trễ join',
+    'Grain = 1 row / quotation':'Grain = 1 dòng / báo giá',
+    'Dead Stock >90d':'Hàng chết >90 ngày', 'OBT Risk Model':'Mô hình rủi ro OBT',
+    'Conversion Rate 16.2%':'Tỷ lệ chuyển đổi 16.2%', 'Quote Value':'Giá trị báo giá',
+    '145M+ VND Dead Stock':'145M+ VNĐ hàng chết', 'Aging Risk':'Rủi ro tuổi tồn',
+    'Variance %':'% Chênh lệch', 'Over-Budget Red Alert':'Cảnh báo vượt ngân sách',
+    '1NF Channels':'Kênh chuẩn 1NF', 'Account LTV':'LTV khách hàng',
+    'Power BI Measure':'Measure Power BI', 'Business Problem → Action':'Vấn đề kinh doanh → Hành động',
+    'Advanced SQL':'SQL nâng cao', '−90% Manual Reporting':'−90% báo cáo thủ công',
+    'Structured Storytelling':'Kể chuyện có cấu trúc',
+    /* tên KPI trong bảng định nghĩa */
+    'Quotation Conversion Rate':'Tỷ lệ chuyển đổi báo giá',
+    'Dead Stock (>90d)':'Hàng chết (>90 ngày)',
+    'Budget Variance %':'% Chênh lệch ngân sách',
+    /* tab & điều hướng case study */
+    'Commercial Funnel':'Phễu Thương mại',
+    'CRM & Segmentation':'CRM & Phân khúc',
+    'Lead Quality':'Chất lượng Lead',
+    'Inventory & Budget':'Tồn kho & Ngân sách',
+    '01 · Commercial Funnel':'01 · Phễu Thương mại',
+    '02 · CRM & Segmentation':'02 · CRM & Phân khúc',
+    '03 · Lead Quality':'03 · Chất lượng Lead',
+    '04 · Inventory & Budget (OBT)':'04 · Tồn kho & Ngân sách (OBT)',
+    '← Prev':'← Trước', 'Next →':'Sau →',
+    'Live Dashboard — Meridian Data Mart':'Dashboard trực tiếp — Meridian Data Mart'
+  };
+  var SEL = '.arch-badge, .exp-dates, .exp-company, .skip-link, .table-matrix b, .edu-card h3, .hero-meta span, .result-chip, .cs-tab-name, .cs-pager-btn, .cs-highlight-label, .demo-title';
+  function applyStaticVN(){
+    var vn = (typeof currentLang !== 'undefined') && currentLang === 'vn';
+    document.querySelectorAll(SEL).forEach(function(el){
+      if(el.dataset.enHtml === undefined){
+        var t = (el.textContent||'').trim();
+        if(!Object.prototype.hasOwnProperty.call(STATIC_VN, t)) return;
+        el.dataset.enHtml = el.innerHTML;
+        el.dataset.vnHtml = STATIC_VN[t];
+      }
+      el.innerHTML = vn ? el.dataset.vnHtml : el.dataset.enHtml;
+    });
+    // dựng lại nhãn pager sau khi tên tab đã đổi ngôn ngữ
+    var lbl = document.getElementById('csPagerLabel');
+    var act = document.querySelector('.cs-tab.is-active');
+    if(lbl && act && act.querySelector('.cs-tab-name')){
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('.cs-tab'));
+      lbl.textContent = (vn ? 'Dự án ' : 'Case Study ') + (tabs.indexOf(act)+1)
+        + ' / ' + tabs.length + ' — ' + act.querySelector('.cs-tab-name').textContent.trim();
+    }
+  }
+  function run(){ try{ applyStaticVN(); }catch(e){} }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+  else run();
+  document.addEventListener('click', function(){ setTimeout(run, 120); });
 })();
 </script>
 </body>
