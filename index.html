@@ -340,7 +340,7 @@
   .c-rose{ color:var(--rose) !important; }
 
   .hero-kpis{
-    display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(min(140px, 100%), 1fr));
     gap:14px; margin-top:30px; margin-bottom:8px; width:100%;
   }
   .hero-kpi{
@@ -499,7 +499,7 @@
   .demo-charts-grouped{ display:flex; flex-direction:column; gap:22px; }
   .chart-group-head{ display:flex; align-items:baseline; gap:10px; margin-bottom:12px; flex-wrap:wrap; font-family:var(--font-mono); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:var(--blue); border-left:2px solid var(--blue); padding-left:10px; }
   .chart-group-sub{ font-weight:500; text-transform:none; letter-spacing:0; font-size:11.5px; color:var(--text-dim); }
-  .chart-group-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:14px; }
+  .chart-group-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(min(230px, 100%), 1fr)); gap:14px; }
   .demo-chart-card{ background:var(--bg-panel-alt); border:1px solid var(--border); border-radius:8px; padding:16px; }
   .demo-chart-head{ font-family:var(--font-mono); font-size:11px; color:var(--text-muted); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.04em; }
   .chart-canvas-wrap{ position:relative; height:180px; }
@@ -664,7 +664,7 @@
     .profile-rows{ text-align:left; }
   }
 
-  .arch-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:24px; margin-top:24px; }
+  .arch-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap:24px; margin-top:24px; }
   .arch-card{ background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius); padding:28px; box-shadow:var(--shadow); transition:transform .2s ease, border-color .2s ease; display:flex; flex-direction:column; justify-content:space-between; }
   .arch-card:hover{ border-color:var(--border-hi); transform:translateY(-2px); }
   .arch-card-title{ font-size:17px; font-weight:700; color:var(--text); margin-bottom:8px; display:flex; align-items:center; gap:10px; }
@@ -696,6 +696,63 @@
   .table-matrix th{ background:var(--bg-panel-hi); color:var(--text); font-family:var(--font-mono); font-size:11.5px; text-transform:uppercase; letter-spacing:0.05em; }
   .table-matrix td{ color:var(--text-muted); }
   .table-matrix td b{ color:var(--text); }
+
+/* ===================== TỐI ƯU MOBILE ===================== */
+@keyframes pipeFlowV{ from{ background-position:0 0; } to{ background-position:0 13px; } }
+
+@media (max-width:640px){
+  /* Sơ đồ pipeline: 6 node ngang không vừa 390px -> xếp dọc */
+  .pipe-track{ flex-direction:column; align-items:stretch; padding:18px 16px; }
+  .pipe-node{ flex:0 0 auto; width:100%; padding:11px 13px; text-align:left; }
+  .pipe-connector{
+    flex:0 0 26px; width:3px; height:26px; min-width:0; max-width:none; margin:6px auto;
+    background-image:repeating-linear-gradient(180deg,var(--blue) 0 7px,transparent 7px 13px);
+    background-size:3px 13px; animation-name:pipeFlowV;
+  }
+  .pipe-connector-thick{
+    width:4px;
+    background-image:repeating-linear-gradient(180deg,var(--teal) 0 8px,transparent 8px 16px);
+  }
+  /* Dải kết quả: xếp dọc, mũi tên xoay xuống */
+  .pipe-result-flow{ flex-direction:column; gap:12px; padding:20px 16px; }
+  .pipe-result-step{ padding:0; }
+  .pipe-result-value{ font-size:27px; }
+  .pipe-arrow{ padding:0; transform:rotate(90deg); line-height:1; }
+
+  /* Vùng chạm tối thiểu 44px cho các control thật sự bấm được */
+  .lang-btn{ min-height:40px; min-width:44px; display:inline-flex; align-items:center; justify-content:center; }
+  .menu-toggle{ min-height:44px; min-width:44px; }
+  .cs-pager-btn{ min-height:44px; padding-left:18px; padding-right:18px; }
+  .btn{ min-height:44px; display:inline-flex; align-items:center; justify-content:center; }
+  .nav-dropdown-menu a{ min-height:42px; display:flex; align-items:center; }
+  .cs-tab, .cs-tabs button{ min-height:44px; }
+
+  /* Chữ dài không làm vỡ khung */
+  .pipe-node-title, .pipe-node-sub, .exp-company, .cert-name{ overflow-wrap:anywhere; }
+}
+
+/* Chặn cuộn ngang do làm tròn subpixel */
+html, body{ max-width:100%; }
+
+
+@media (max-width:640px){
+  /* Bảng 3 cột không đọc được ở 390px -> chuyển thành thẻ xếp chồng */
+  .table-matrix, .table-matrix tbody, .table-matrix tr, .table-matrix td{ display:block; width:100%; }
+  .table-matrix{ border-collapse:separate; }
+  .table-matrix tr:first-child{ display:none; }
+  .table-matrix tr{
+    border:1px solid var(--border-hi); border-radius:11px;
+    padding:13px 15px; margin-bottom:11px; background:var(--bg-panel-alt);
+  }
+  .table-matrix td{ border:none; padding:7px 0; }
+  .table-matrix td::before{
+    content:attr(data-label); display:block;
+    font-family:var(--font-mono); font-size:10px; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--text-dim); margin-bottom:3px;
+  }
+  .table-matrix td:not([data-label])::before{ display:none; }
+  .table-matrix code{ overflow-wrap:anywhere; }
+}
 </style>
 </head>
 <body>
@@ -924,6 +981,7 @@
                 <span class="status-tag active" data-i18n="exp_active">Active</span>
                 <h3 data-i18n="exp_role1">Business Intelligence Engineer</h3>
                 <div class="exp-company">Meridian B2B Enterprise Operations</div>
+                <div class="exp-company" style="opacity:.65;font-size:.85em;margin-top:2px" data-i18n="exp_anon">Client name anonymized · Real employer disclosed on CV and in interview.</div>
               </div>
               <div class="exp-dates">04/2025 — Present</div>
             </div>
@@ -1444,7 +1502,7 @@ SUM(b.quotation_value) OVER (
             <p class="arch-card-desc" data-i18n="dg1_d">5-Stage Funnel visual tracking lead movement from top-of-funnel inquiry to contract signature, highlighting drop-off points.</p>
           </div>
           <div class="arch-badge-row">
-            <span class="arch-badge">Conversion Rate 24.8%</span><span class="arch-badge teal">Quote Value</span>
+            <span class="arch-badge">Conversion Rate 16.2%</span><span class="arch-badge teal">Quote Value</span>
           </div>
         </div>
 
@@ -1549,7 +1607,7 @@ DIVIDE(
         <span class="section-index">11</span>
         <div class="eyebrow" data-i18n="sk_eyebrow">Capability Matrix</div>
         <h2 class="section-title" data-i18n="sk_title">Skills &amp; tools</h2>
-        <p class="section-sub" data-i18n="sk_sub">Capability matrix &amp; tools. English proficiency: Upper-Intermediate.</p>
+        <p class="section-sub" data-i18n="sk_sub">Capability matrix &amp; tools. English — Reading (technical documentation) B2 · Writing (work email) B1 · Speaking A2–B1, self-taught.</p>
       </div>
       <div class="skills-grid reveal">
         <div class="skill-group">
@@ -1868,7 +1926,7 @@ DIVIDE(
       p1_t: "ERP / Google Sheets", p1_s: "Operational transactions", p2_t: "Apps Script", p2_s: "Business logic & workflow", p3_t: "Normalized ERP", p3_s: "Relational data model", p4_t: "SQL Transformation", p4_s: "Cleaning · Modeling · KPI Logic", p5_t: "Enterprise Data Warehouse", p5_s: "BigQuery analytical storage", p6_t: "Star Schema", p6_s: "Fact & Dimension Model", p7_t: "Power BI", p7_s: "Executive Dashboards", p8_t: "Business Decisions", p8_s: "Operational & Strategic",
       r1: "Manual Reporting Reduction", r2: "Trusted & Standardized KPIs", r3: "Executive Dashboards", r4: "Business Decisions",
       principles_head: "Architecture Principles", pri1: "• Separation of OLTP & OLAP", pri2: "• Single Source of Truth", pri3: "• Centralized KPI Logic", pri4: "• Reusable SQL Models", pri5: "• Star Schema Design",
-      exp_eyebrow: "Work Log", exp_title: "Experience", exp_active: "Active", exp_done: "Completed", exp_role1: "Business Intelligence Engineer", exp_role2: "Data Science Intern",
+      exp_eyebrow: "Work Log", exp_title: "Experience", exp_active: "Active", exp_done: "Completed", exp_role1: "Business Intelligence Engineer", exp_anon: "Client name anonymized · Real employer disclosed on CV and in interview.", exp_role2: "Data Science Intern",
       exp_b1: "Architected and deployed Google BigQuery Data Warehouse & 4 Dimensional Data Marts as the sole data owner for the analytics function, connecting Commercial Sales, CRM, Inbound/Outbound Logistics, and Project Costing — working directly with Sales, Warehouse, and Project leads to define requirements.",
       exp_b2: "Engineered production-grade SQL data pipelines: applied 1NF string unnesting (`CROSS JOIN UNNEST(SPLIT)`), JSON array extraction (`SAFE.PARSE_JSON` + `ARRAY_LENGTH`), and One Big Table (OBT) architecture for dynamic inventory aging (>90 days dead stock) and project budget variance.",
       exp_b3: "Designed automated analytics models answering 20+ executive business questions across sales conversion rates (`kpi5_conversion_rate_pct`), client segment profitability, and capital locked in idle inventory.",
@@ -1922,7 +1980,7 @@ DIVIDE(
       doc3_h: "KPI Definitions (excerpt)", doc_def: "Definition", doc_grain: "Grain", doc_kpi1: "Contracts Signed &divide; Quotations Sent, current period", doc_grain1: "Per quotation", doc_kpi2: "Material value with <code>aging_days &gt; 90</code> and no stock-out movement in the period", doc_grain2: "Per material, current snapshot", doc_kpi3: "(Actual Site Dispatch Cost &minus; Baseline Estimate) &divide; Baseline Estimate", doc_grain3: "Per project",
       doc4_h: "SQL Naming Standards", doc4_p: "<code>base_*</code> = cleaned staging view &middot; <code>fact_*</code> / <code>dim_*</code> = warehouse layer &middot; <code>vw_*</code> = BI-facing semantic view &middot; snake_case throughout, no reserved words, no ambiguous abbreviations.",
       doc5_h: "Future Improvements Roadmap", doc5_p1: "&bull; <strong>Proactive KPI Alerts:</strong> Push automated threshold alerts (e.g. dead stock &gt;90 days, project budget overrun) straight to the team instead of waiting for someone to open the dashboard.", doc5_p2: "&bull; <strong>Self-Service Expansion:</strong> Extend the Power BI semantic model so Sales and Project teams can build their own report views without waiting on a request queue.", doc5_p3: "&bull; <strong>Lightweight Forecasting:</strong> Add trend-line forecasting in Power BI/DAX for inventory reorder points and revenue run-rate — enough to support planning without over-engineering a full ML pipeline.",
-      sk_eyebrow: "Capability Matrix", sk_title: "Skills & tools", sk_sub: "Capability matrix & tools. English proficiency: Upper-Intermediate.",
+      sk_eyebrow: "Capability Matrix", sk_title: "Skills & tools", sk_sub: "Capability matrix & tools. English — Reading (technical documentation) B2 · Writing (work email) B1 · Speaking A2–B1, self-taught.",
       sk1: "BI & Visualization", sk1_1: "Data Modeling", sk1_2: "KPI Dashboards", sk1_3: "Data Storytelling", sk2: "Query & Data", sk2_1: "Advanced SQL", sk2_2: "Window Functions", sk2_3: "Query Optimization", sk3: "Programming & Forecasting", sk3_1: "Time-Series Forecasting", sk4: "Spreadsheets", sk4_1: "Dynamic Arrays", sk4_2: "Conditional Formatting", sk5: "Automation & Systems", sk5_1: "Workflow Automation", sk6: "Governance & Quality", sk6_1: "Data Governance", sk6_2: "Data Monitoring", sk6_3: "Data Quality Control",
       cer_eyebrow: "Records", cer_title: "Certifications & education",
       edu_major: "Information Technology / Data Science", edu_meta: "2020 — 2024<br>Graduated with Honors",
@@ -1952,7 +2010,7 @@ DIVIDE(
       p1_t: "ERP / Google Sheets", p1_s: "Giao dịch vận hành", p2_t: "Apps Script", p2_s: "Logic nghiệp vụ & quy trình", p3_t: "ERP Chuẩn hóa", p3_s: "Mô hình dữ liệu quan hệ", p4_t: "Biến đổi SQL", p4_s: "Làm sạch · Mô hình hóa · Logic KPI", p5_t: "Kho Dữ Liệu Doanh Nghiệp", p5_s: "Kho lưu trữ phân tích BigQuery", p6_t: "Star Schema", p6_s: "Mô hình Fact & Dimension", p7_t: "Power BI", p7_s: "Dashboard Điều hành", p8_t: "Quyết định Kinh doanh", p8_s: "Vận hành & Chiến lược",
       r1: "Giảm Báo cáo Thủ công", r2: "KPI Chuẩn hóa & Đáng tin cậy", r3: "Dashboard Điều hành", r4: "Quyết định Kinh doanh",
       principles_head: "Nguyên tắc Kiến trúc", pri1: "• Phân tách OLTP & OLAP", pri2: "• Nguồn dữ liệu duy nhất", pri3: "• Tập trung Logic KPI", pri4: "• Mô hình SQL tái sử dụng", pri5: "• Thiết kế Star Schema",
-      exp_eyebrow: "Nhật ký Công việc", exp_title: "Kinh nghiệm", exp_active: "Đang làm", exp_done: "Đã hoàn thành", exp_role1: "Kỹ sư Business Intelligence", exp_role2: "Thực tập sinh Data Science",
+      exp_eyebrow: "Nhật ký Công việc", exp_title: "Kinh nghiệm", exp_active: "Đang làm", exp_done: "Đã hoàn thành", exp_role1: "Kỹ sư Business Intelligence", exp_anon: "Tên khách hàng đã ẩn danh · Tên công ty thật có trên CV và trao đổi khi phỏng vấn.", exp_role2: "Thực tập sinh Data Science",
       exp_b1: "Thiết kế và triển khai Kho Dữ Liệu Google BigQuery & 4 Data Marts đa chiều là người sở hữu dữ liệu duy nhất cho chức năng phân tích, kết nối Bán hàng Thương mại, CRM, Logistics Nhập/Xuất, và Giá thành Dự án — làm việc trực tiếp với trưởng phòng Sales, Warehouse, và Project để định nghĩa yêu cầu.",
       exp_b2: "Xây dựng pipeline dữ liệu SQL cấp độ production: áp dụng tách chuỗi 1NF (`CROSS JOIN UNNEST(SPLIT)`), trích xuất mảng JSON (`SAFE.PARSE_JSON` + `ARRAY_LENGTH`), và kiến trúc One Big Table (OBT) cho phân loại tồn kho động (&gt;90 ngày chết kho) và chênh lệch ngân sách dự án.",
       exp_b3: "Thiết kế mô hình phân tích tự động trả lời 20+ câu hỏi kinh doanh điều hành về tỷ lệ chuyển đổi bán hàng (`kpi5_conversion_rate_pct`), lợi nhuận phân khúc khách hàng, và vốn bị khóa trong hàng tồn kho nhàn rỗi.",
@@ -2006,7 +2064,7 @@ DIVIDE(
       doc3_h: "Định nghĩa KPI (trích xuất)", doc_def: "Định nghĩa", doc_grain: "Grain", doc_kpi1: "Hợp đồng Ký &divide; Báo giá Gửi, kỳ hiện tại", doc_grain1: "Mỗi báo giá", doc_kpi2: "Giá trị vật tư với <code>aging_days &gt; 90</code> và không có movement stock-out trong kỳ", doc_grain2: "Mỗi vật tư, snapshot hiện tại", doc_kpi3: "(Chi phí Điều động Hiện trường Thực tế &minus; Dự toán Cơ sở) &divide; Dự toán Cơ sở", doc_grain3: "Mỗi dự án",
       doc4_h: "Tiêu chuẩn Đặt tên SQL", doc4_p: "<code>base_*</code> = cleaned staging view &middot; <code>fact_*</code> / <code>dim_*</code> = warehouse layer &middot; <code>vw_*</code> = BI-facing semantic view &middot; snake_case xuyên suốt, không từ khóa đặt trước, không viết tắt mơ hồ.",
       doc5_h: "Lộ trình Cải tiến Tương lai", doc5_p1: "&bull; <strong>Cảnh báo KPI Chủ động:</strong> Đẩy cảnh báo ngưỡng tự động (VD chết kho &gt;90 ngày, vượt ngân sách dự án) thẳng đến team thay vì đợi ai đó mở dashboard.", doc5_p2: "&bull; <strong>Mở rộng Self-Service:</strong> Mở rộng mô hình ngữ nghĩa Power BI để team Sales và Project tự xây dựng view báo cáo mà không cần chờ hàng đợi yêu cầu.", doc5_p3: "&bull; <strong>Dự báo Nhẹ:</strong> Thêm dự báo đường xu hướng trong Power BI/DAX cho điểm đặt hàng lại tồn kho và revenue run-rate — đủ để hỗ trợ lập kế hoạch mà không over-engineer pipeline ML đầy đủ.",
-      sk_eyebrow: "Ma trận Năng lực", sk_title: "Kỹ năng & công cụ", sk_sub: "Ma trận năng lực & công cụ. Trình độ Tiếng Anh: Trung cấp Cao.",
+      sk_eyebrow: "Ma trận Năng lực", sk_title: "Kỹ năng & công cụ", sk_sub: "Ma trận năng lực & công cụ. Tiếng Anh — Đọc hiểu tài liệu kỹ thuật B2 · Viết email công việc B1 · Giao tiếp A2–B1, tự học.",
       sk1: "BI & Trực quan hóa", sk1_1: "Mô hình hóa Dữ liệu", sk1_2: "Dashboard KPI", sk1_3: "Kể chuyện Dữ liệu", sk2: "Truy vấn & Dữ liệu", sk2_1: "SQL Nâng cao", sk2_2: "Window Functions", sk2_3: "Tối ưu Truy vấn", sk3: "Lập trình & Dự báo", sk3_1: "Dự báo Chuỗi thời gian", sk4: "Bảng tính", sk4_1: "Mảng Động", sk4_2: "Định dạng Điều kiện", sk5: "Tự động hóa & Hệ thống", sk5_1: "Tự động hóa Quy trình", sk6: "Quản trị & Chất lượng", sk6_1: "Quản trị Dữ liệu", sk6_2: "Giám sát Dữ liệu", sk6_3: "Kiểm soát Chất lượng Dữ liệu",
       cer_eyebrow: "Chứng chỉ", cer_title: "Chứng nhận & học vấn",
       edu_major: "Công nghệ Thông tin / Data Science", edu_meta: "2020 — 2024<br>Tốt nghiệp Loại Giỏi",
@@ -2105,8 +2163,8 @@ LEFT JOIN \`datawarehouse-480104.MeridianData.base_contract_clean\` ct ON q.quot
 WHERE q.quotation_status NOT IN ('05. Stop', 'Deleted');`,
         kpis: [
           { label:{ en:'Leads Reached', vn:'Lead Tiếp cận' }, value:'640', color:'blue', insight:{ en:'640 leads entered the funnel, but under a quarter ever reach a quote — the drop-off starts before Sales even sends a price.', vn:'640 lead vào phễu, nhưng chưa tới một phần tư bao giờ nhận báo giá — rớt bắt đầu trước khi Sales gửi giá.' }, action:{ en:'Audit leads idle 7+ days and reassign them before they go cold.', vn:'Kiểm toán lead nhàn rỗi 7+ ngày và gán lại trước khi chúng lạnh.' } },
-          { label:{ en:'Quotations Sent', vn:'Báo giá Gửi' }, value:'150', color:'teal', insight:{ en:'Only 150 of 640 leads (23%) made it to a quote — most of the funnel loss happens before this stage, not after.', vn:'Chỉ 150/640 lead (23%) lên báo giá — đa số mất mát phễu xảy ra trước giai đoạn này, không phải sau.' }, action:{ en:'Find where the other 490 leads dropped off before reaching a quote.', vn:'Tìm xem 490 lead kia rớt ở đâu trước khi lên báo giá.' } },
-          { label:{ en:'Contracts Signed', vn:'Hợp đồng Ký' }, value:'29', color:'amber', insight:{ en:'29 signed contracts from 150 quotes means roughly 4 in 5 quotes never close — the real bottleneck sits between quote and contract.', vn:'29 hợp đồng ký từ 150 báo giá nghĩa là khoảng 4/5 báo giá không đóng — nút thắt thực sự nằm giữa báo giá và hợp đồng.' }, action:{ en:'Interview these 29 clients for what tipped the deal — turn it into a sales script.', vn:'Phỏng vấn 29 khách hàng này để xem gì làm chốt deal — biến nó thành kịch bản sales.' } },
+          { label:{ en:'Quotations Sent', vn:'Báo giá Gửi' }, value:'148', color:'teal', insight:{ en:'Only 148 of 640 leads (23%) made it to a quote — most of the funnel loss happens before this stage, not after.', vn:'Chỉ 148/640 lead (23%) lên báo giá — đa số mất mát phễu xảy ra trước giai đoạn này, không phải sau.' }, action:{ en:'Find where the other 490 leads dropped off before reaching a quote.', vn:'Tìm xem 490 lead kia rớt ở đâu trước khi lên báo giá.' } },
+          { label:{ en:'Contracts Signed', vn:'Hợp đồng Ký' }, value:'24', color:'amber', insight:{ en:'24 signed contracts from 148 quotes means more than 4 in 5 quotes never close — the real bottleneck sits between quote and contract.', vn:'24 hợp đồng ký từ 148 báo giá nghĩa là hơn 4/5 báo giá không đóng — nút thắt thực sự nằm giữa báo giá và hợp đồng.' }, action:{ en:'Interview these 24 clients for what tipped the deal — turn it into a sales script.', vn:'Phỏng vấn 24 khách hàng này để xem gì làm chốt deal — biến nó thành kịch bản sales.' } },
           { label:{ en:'Quotation Conversion Rate', vn:'Tỷ lệ Chuyển đổi Báo giá' }, value:'16.2%', color:'violet', insight:{ en:'16.2% is the number leadership tracks quarter over quarter — anything below it flags a rep or region needing support.', vn:'16.2% là số lãnh đạo theo dõi quý qua quý — bất cứ thứ gì dưới nó gắn cờ rep hoặc vùng cần hỗ trợ.' }, action:{ en:'Set a target above 16.2% and flag any rep tracking below it.', vn:'Đặt mục tiêu trên 16.2% và gắn cờ bất kỳ rep nào theo dõi dưới nó.' } }
         ],
         charts: [
@@ -2431,5 +2489,27 @@ UNION ALL ... -- STOCK_IN, STOCK_OUT, PROJECT_VARIANCE`,
   })();
 </script>
 
+
+<script>
+(function(){
+  function labelTables(){
+    document.querySelectorAll('table.table-matrix').forEach(function(t){
+      var head = t.querySelector('tr'); if(!head) return;
+      var heads = Array.prototype.map.call(head.querySelectorAll('th'), function(th){ return th.textContent.trim(); });
+      if(!heads.length) return;
+      t.querySelectorAll('tr').forEach(function(row){
+        Array.prototype.forEach.call(row.querySelectorAll('td'), function(td, i){
+          if(heads[i]) td.setAttribute('data-label', heads[i]);
+        });
+      });
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', labelTables);
+  else labelTables();
+  document.addEventListener('click', function(e){
+    if(e.target && e.target.closest && e.target.closest('.lang-btn')) setTimeout(labelTables, 80);
+  });
+})();
+</script>
 </body>
 </html>
