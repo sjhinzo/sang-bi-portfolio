@@ -409,7 +409,7 @@
   .about-outcome{ border-left:3px solid var(--teal); padding-left:14px; }
 
   /* ---------- CASE STUDIES + DASHBOARD (tabbed) ---------- */
-  .cs-highlights{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:28px; }
+  .cs-highlights{ display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-bottom:28px; }
   .cs-highlight{ background:var(--bg-panel-alt); border-left:3px solid var(--blue); border-radius:6px; padding:14px 16px; }
   .cs-highlight:nth-child(2){ border-left-color:var(--teal); }
   .cs-highlight:nth-child(3){ border-left-color:var(--amber); }
@@ -417,7 +417,7 @@
   .cs-highlight-label{ font-family:var(--font-mono); font-size:10.5px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; }
   .cs-highlight p{ margin:8px 0 0; font-size:13px; color:var(--text); font-weight:500; line-height:1.5; }
 
-  .cs-tabs{ display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; margin-bottom:20px; }
+  .cs-tabs{ display:grid; grid-template-columns:repeat(5, 1fr); gap:10px; margin-bottom:20px; }
   .cs-tab{
     position:relative; text-align:left; background:var(--bg-panel); border:1px solid var(--border);
     border-radius:12px; padding:16px 16px 14px; cursor:pointer; font-family:inherit;
@@ -460,7 +460,7 @@
     display:flex; background:var(--bg-panel); border:1px solid var(--border); border-radius:12px;
     box-shadow:var(--shadow); margin-bottom:16px;
   }
-  .cs-step{ flex:1; padding:20px 24px; position:relative; }
+  .cs-step{ padding:20px 18px; position:relative; min-width:0; }
   .cs-step:not(:first-child){ border-left:1px dashed var(--border-hi); }
   .cs-step:not(:first-child)::before{
     content:"→"; position:absolute; left:-10px; top:20px;
@@ -624,7 +624,7 @@
     .split-grid{ grid-template-columns:1fr; }
     .skills-grid{ grid-template-columns:1fr; }
     .cs-tabs{ grid-template-columns:repeat(2, 1fr); }
-    .cs-flow{ flex-direction:column; }
+    .cs-flow{ grid-template-columns:1fr; }
     .cs-step:not(:first-child){ border-left:none; border-top:1px dashed var(--border-hi); }
     .cs-step:not(:first-child)::before{ content:"↓"; left:20px; top:-10px; }
     .cs-highlights{ grid-template-columns:repeat(2,1fr); }
@@ -986,13 +986,13 @@ html, body{ max-width:100%; }
               <div class="exp-dates">04/2025 — Present</div>
             </div>
             <ul class="exp-bullets">
-              <li data-i18n="exp_b1">Architected and deployed a governed BigQuery data warehouse and 4 star-schema data marts as sole owner of the analytics function at a 25-person B2B manufacturer — unifying 3 legal entities running on a vendor-built web ERP, and working directly with Sales, Warehouse, and Project leads to define requirements.</li>
-              <li data-i18n="exp_b6">Configured automated ERP → BigQuery → Power BI refresh pipelines on a medallion architecture, cutting recurring reporting from 3 hours to 15 minutes per day (92%, roughly 690 hours per year) while providing daily operational monitoring.</li>
-              <li data-i18n="exp_b9">Surfaced 145M+ VND of dead stock through the inventory aging OBT model (Managing Director thresholds: 90+ days, 5M+ VND, 5 alert tiers) — triggering on-site stock verification and a targeted quotation push that moved flagged inventory back out to customers.</li>
-              <li data-i18n="exp_b8">Delivered 4 executive Power BI dashboards used daily by 25+ people — effectively the full company — plus dashboards built for partner departments spanning 50+ staff; each one scoped through structured stakeholder interviews mapping pain points, process steps, data structure and field ownership before any modeling began.</li>
-              <li data-i18n="exp_b2">Engineered production-grade SQL data pipelines: applied 1NF string unnesting (`CROSS JOIN UNNEST(SPLIT)`), JSON array extraction (`SAFE.PARSE_JSON` + `ARRAY_LENGTH`), and One Big Table (OBT) architecture for dynamic inventory aging (&gt;90 days dead stock) and project budget variance.</li>
-              <li data-i18n="exp_b3">Designed automated analytics models answering 20+ executive business questions across sales conversion rates (`kpi5_conversion_rate_pct`), client segment profitability, and capital locked in idle inventory.</li>
-              <li data-i18n="exp_b5">Engineered dynamic inventory calculation logic (`StockIn - StockOut`) directly from transaction detail tables, preventing data loss from missing master catalog IDs.</li>
+              <li data-i18n="exp_b1">Built HR and operational reporting workflows covering employee attendance, task output, performance KPIs, workforce productivity, and labor-cost/OPEX — working directly with management and cross-functional teams to translate reporting needs into data solutions.</li>
+              <li data-i18n="exp_b6">Developed attendance tracking and reporting logic from check-in/check-out events, standardizing daily attendance data for HR and workforce reporting and reducing manual follow-up.</li>
+              <li data-i18n="exp_b9">Tracked employee task output and monthly performance KPIs, including total tasks, completion rate, and pass/fail evaluation, to support workforce performance reporting and management review.</li>
+              <li data-i18n="exp_b8">Consolidated salary/labor-cost (OPEX), attendance, and performance data into Power BI reporting, giving management a combined view of workforce cost, productivity, and performance instead of separate manual reports.</li>
+              <li data-i18n="exp_b2">Designed an end-to-end Web App → Google Sheets → BigQuery → Power BI workflow for structured data capture, validation, transformation, and recurring HR/operational reporting.</li>
+              <li data-i18n="exp_b3">Automated recurring reporting workflows, cutting reporting time from roughly 3 hours to 15 minutes per day (92%, approximately 690 hours saved per year) while improving reporting consistency.</li>
+              <li data-i18n="exp_b5">Implemented data-quality checks and point-of-entry validation to surface duplicate, missing, and inconsistent records before they reached downstream dashboards and reports.</li>
             </ul>
             <div class="exp-results">
               <span class="result-chip" data-i18n="exp_r1">92% less reporting time</span>
@@ -1280,7 +1280,7 @@ html, body{ max-width:100%; }
         <span class="section-index">07</span>
         <div class="eyebrow" data-i18n="cs_eyebrow">Proof Of Work</div>
         <h2 class="section-title" data-i18n="cs_title">Case Studies &amp; Live Dashboards</h2>
-        <p class="section-sub" data-i18n="cs_sub">4 real-world case studies extracted directly from Meridian's enterprise data. Pick a project below to see the full journey — from the Business Problem, Data Landscape, and SQL Standardization, to the Data Mart, KPI Dashboard, and recommended Next Action.</p>
+        <p class="section-sub" data-i18n="cs_sub">5 case studies showing the same analyst workflow end-to-end: Introduction → Background → Evaluation → Proposed Solution → Recommendations. Each case connects the business problem to data, analysis, decision logic, and measurable next action.</p>
       </div>
 
       <div class="cs-highlights reveal">
@@ -1300,36 +1300,46 @@ html, body{ max-width:100%; }
           <span class="cs-highlight-label">04 · Inventory &amp; Budget (OBT)</span>
           <p data-i18n="csh4">Builds a One Big Table to control aging dead stock &amp; over-budget projects.</p>
         </div>
+        <div class="cs-highlight">
+          <span class="cs-highlight-label">05 · HR Workforce Analytics</span>
+          <p data-i18n="csh5">Personal project combining attendance, task output, performance KPI and OPEX into one workforce view.</p>
+        </div>
       </div>
 
       <div class="reveal">
         <div class="cs-tabs" role="tablist" aria-label="Case studies">
-          <button class="cs-tab is-active" data-case="sales" role="tab" aria-selected="true" type="button">
+          <button class="cs-tab is-active" data-case="hr" role="tab" aria-selected="true" type="button">
           <span class="cs-tab-num">01</span>
+          <span class="cs-tab-name">HR Workforce Analytics</span>
+          <span class="cs-tab-sub" data-i18n="tab1_s">Attendance · Performance · OPEX</span>
+          </button>
+          <button class="cs-tab" data-case="sales" role="tab" aria-selected="false" type="button">
+          <span class="cs-tab-num">02</span>
           <span class="cs-tab-name">Commercial Funnel</span>
-          <span class="cs-tab-sub" data-i18n="tab1_s">Funnel Sales &amp; Market Share</span>
+          <span class="cs-tab-sub" data-i18n="tab2_s">Funnel Sales &amp; Market Share</span>
           </button>
           <button class="cs-tab" data-case="client" role="tab" aria-selected="false" type="button">
-          <span class="cs-tab-num">02</span>
+          <span class="cs-tab-num">03</span>
           <span class="cs-tab-name">CRM &amp; Segmentation</span>
-          <span class="cs-tab-sub" data-i18n="tab2_s">1NF Contact Channel Standard</span>
+          <span class="cs-tab-sub" data-i18n="tab3_s">1NF Contact Channel Standard</span>
           </button>
           <button class="cs-tab" data-case="customer" role="tab" aria-selected="false" type="button">
-          <span class="cs-tab-num">03</span>
+          <span class="cs-tab-num">04</span>
           <span class="cs-tab-name">Lead Quality</span>
-          <span class="cs-tab-sub" data-i18n="tab3_s">Conversion KPIs &amp; JSON</span>
+          <span class="cs-tab-sub" data-i18n="tab4_s">Conversion KPIs &amp; JSON</span>
           </button>
           <button class="cs-tab" data-case="production" role="tab" aria-selected="false" type="button">
-          <span class="cs-tab-num">04</span>
+          <span class="cs-tab-num">05</span>
           <span class="cs-tab-name">Inventory &amp; Budget</span>
-          <span class="cs-tab-sub" data-i18n="tab4_s">OBT Model &amp; Risk</span>
+          <span class="cs-tab-sub" data-i18n="tab5_s">OBT Model &amp; Risk</span>
           </button>
         </div>
 
         <div class="cs-pager">
-          <span id="csPagerLabel">Case Study 1 / 4 — Commercial Funnel</span>
+          <span id="csPagerLabel">Case Study 1 / 5 — HR Workforce Analytics</span>
           <div class="cs-pager-dots" id="csPagerDots" aria-hidden="true">
             <span class="cs-pager-dot is-active"></span>
+            <span class="cs-pager-dot"></span>
             <span class="cs-pager-dot"></span>
             <span class="cs-pager-dot"></span>
             <span class="cs-pager-dot"></span>
@@ -1345,41 +1355,46 @@ html, body{ max-width:100%; }
           <span class="cs-step-label" data-i18n="cs_q">Business Question</span>
           <p id="csBusinessQuestion"></p>
         </div>
+
         <div class="cs-flow">
           <div class="cs-step">
-            <span class="cs-step-label" data-i18n="cs_p1">01 · Business Problem</span>
-            <p id="csProblem"></p>
+            <span class="cs-step-label" data-i18n="cs_p1">01 · Introduction</span>
+            <p id="csIntro"></p>
           </div>
           <div class="cs-step">
-            <span class="cs-step-label" data-i18n="cs_p2">02 · Data Landscape</span>
-            <p id="csData"></p>
+            <span class="cs-step-label" data-i18n="cs_p2">02 · Background</span>
+            <p id="csBackground"></p>
           </div>
           <div class="cs-step">
-            <span class="cs-step-label" data-i18n="cs_p3">03 · SQL Standardization</span>
-            <p id="csSql"></p>
+            <span class="cs-step-label" data-i18n="cs_p3">03 · Evaluation</span>
+            <p id="csEvaluation"></p>
           </div>
           <div class="cs-step">
-            <span class="cs-step-label" data-i18n="cs_p4">04 · Data Mart &amp; Solution</span>
+            <span class="cs-step-label" data-i18n="cs_p4">04 · Proposed Solution</span>
             <p id="csSolution"></p>
+          </div>
+          <div class="cs-step">
+            <span class="cs-step-label" data-i18n="cs_p5">05 · Recommendations</span>
+            <p id="csRecommendation"></p>
           </div>
         </div>
 
         <div class="sql-trace">
-          <div class="sql-trace-head"><span class="cs-step-label" data-i18n="cs_sql">SQL Transformation Pattern</span><span data-i18n="cs_sql_sub">Google BigQuery SQL · Production-Ready</span></div>
+          <div class="sql-trace-head"><span class="cs-step-label" data-i18n="cs_sql">SQL / Analysis Trace</span><span data-i18n="cs_sql_sub">BigQuery SQL · KPI Logic · Analysis</span></div>
           <pre id="csSqlPreview"></pre>
         </div>
 
-        <!-- 05 · Dashboard -->
+        <!-- 04 · Proposed Solution -->
         <div class="demo-panel">
           <div class="demo-toolbar">
             <div class="demo-title-group">
               <span class="status-dot" aria-hidden="true"></span>
               <div>
-                <span class="demo-title" id="csDashTitle">Live Dashboard — Meridian Data Mart</span>
+                <span class="demo-title" id="csDashTitle">Decision Dashboard — Data Mart</span>
                 <div class="demo-usedby" id="csUsedBy"></div>
               </div>
             </div>
-            <span class="cs-step-label" data-i18n="cs_p5">05 · KPI Dashboard, Charts &amp; Next Actions</span>
+            <span class="cs-step-label" data-i18n="cs_p4b">04 · Proposed Solution — KPI Dashboard &amp; Decision Layer</span>
           </div>
 
           <div class="demo-kpis" id="csKpis"></div>
@@ -1388,13 +1403,13 @@ html, body{ max-width:100%; }
           <div class="demo-disclaimer" data-i18n="cs_disclaimer">Illustrative data only — names, locations, products, and figures have been anonymized.</div>
         </div>
 
-        <!-- 06 · Next action -->
+        <!-- 05 · Recommendations -->
         <div class="cs-next">
-          <span class="cs-step-label" data-i18n="cs_p6">06 · Strategic Next Action</span>
+          <span class="cs-step-label" data-i18n="cs_p6">05 · Recommendations &amp; Success Metrics</span>
           <p id="csNextAction"></p>
         </div>
 
-        <p class="cs-note" data-i18n="cs_note">The SQL, data model and KPI logic are the real production ones; the figures on this page are illustrative stand-ins. Happy to walk through the live version in an interview.</p>
+        <p class="cs-note" data-i18n="cs_note">Case studies follow one consistent analyst workflow: Problem → Context → Evaluation → Solution → Recommendation. Production logic is shown where possible; portfolio figures are illustrative or anonymized.</p>
         </div>
       </div>
     </div>
@@ -1733,7 +1748,7 @@ DIVIDE(
         <div class="arch-card">
           <div>
             <div class="arch-card-title" data-i18n="hm4_t">Clear, Easy-to-Follow Storytelling</div>
-            <p class="arch-card-desc" data-i18n="hm4_d">Every case study follows the same framework: Problem → Data → SQL → Solution → Dashboard → Next Action, so readers grasp it in minutes.</p>
+            <p class="arch-card-desc" data-i18n="hm4_d">Every case study follows the same framework: Introduction → Background → Evaluation → Proposed Solution → Recommendations, so the reader sees the business logic before the technology.</p>
           </div>
           <div class="arch-badge-row"><span class="arch-badge violet">Structured Storytelling</span></div>
         </div>
@@ -1928,14 +1943,14 @@ DIVIDE(
       r1: "Manual Reporting Reduction", r2: "Trusted & Standardized KPIs", r3: "Executive Dashboards", r4: "Business Decisions",
       principles_head: "Architecture Principles", pri1: "• Separation of OLTP & OLAP", pri2: "• Single Source of Truth", pri3: "• Centralized KPI Logic", pri4: "• Reusable SQL Models", pri5: "• Star Schema Design",
       exp_eyebrow: "Work Log", exp_title: "Experience", exp_active: "Active", exp_done: "Completed", exp_role1: "Business Intelligence Engineer", exp_anon: "Employer name pseudonymised here · Real company name is on my CV.", exp_role2: "Data Science Intern",
-      exp_b1: "Architected and deployed a governed BigQuery data warehouse and 4 star-schema data marts as sole owner of the analytics function at a 25-person B2B manufacturer — unifying 3 legal entities running on a vendor-built web ERP, and working directly with Sales, Warehouse, and Project leads to define requirements.",
-      exp_b8: "Delivered 4 executive Power BI dashboards used daily by 25+ people — effectively the full company — plus dashboards built for partner departments spanning 50+ staff; each one scoped through structured stakeholder interviews mapping pain points, process steps, data structure and field ownership before any modeling began.",
-      exp_b9: "Surfaced 145M+ VND of dead stock through the inventory aging OBT model (Managing Director thresholds: 90+ days, 5M+ VND, 5 alert tiers) — triggering on-site stock verification and a targeted quotation push that moved flagged inventory back out to customers.",
-      exp_b2: "Engineered production-grade SQL data pipelines: applied 1NF string unnesting (`CROSS JOIN UNNEST(SPLIT)`), JSON array extraction (`SAFE.PARSE_JSON` + `ARRAY_LENGTH`), and One Big Table (OBT) architecture for dynamic inventory aging (>90 days dead stock) and project budget variance.",
-      exp_b3: "Designed automated analytics models answering 20+ executive business questions across sales conversion rates (`kpi5_conversion_rate_pct`), client segment profitability, and capital locked in idle inventory.",
+      exp_b1: "Built HR and operational reporting workflows covering employee attendance, task output, performance KPIs, workforce productivity, and labor-cost/OPEX — working directly with management and cross-functional teams to translate reporting needs into data solutions.",
+      exp_b8: "Consolidated salary/labor-cost (OPEX), attendance, and performance data into Power BI reporting, giving management a combined view of workforce cost, productivity, and performance instead of separate manual reports.",
+      exp_b9: "Tracked employee task output and monthly performance KPIs, including total tasks, completion rate, and pass/fail evaluation, to support workforce performance reporting and management review.",
+      exp_b2: "Designed an end-to-end Web App → Google Sheets → BigQuery → Power BI workflow for structured data capture, validation, transformation, and recurring HR/operational reporting.",
+      exp_b3: "Automated recurring reporting workflows, cutting reporting time from roughly 3 hours to 15 minutes per day (92%, approximately 690 hours saved per year) while improving reporting consistency.",
       exp_b4: "Analyzed KPI data using a structured Problem → Data Landscape → SQL Standardization → Solution → Insight → Next Action framework, delivering actionable recommendations to executive leadership.",
-      exp_b5: "Engineered dynamic inventory calculation logic (`StockIn - StockOut`) directly from transaction detail tables, preventing data loss from missing master catalog IDs.",
-      exp_b6: "Configured automated ERP → BigQuery → Power BI refresh pipelines on a medallion architecture, cutting recurring reporting from 3 hours to 15 minutes per day (92%, roughly 690 hours per year) while providing daily operational monitoring.",
+      exp_b5: "Implemented data-quality checks and point-of-entry validation to surface duplicate, missing, and inconsistent records before they reached downstream dashboards and reports.",
+      exp_b6: "Developed attendance tracking and reporting logic from check-in/check-out events, standardizing daily attendance data for HR and workforce reporting and reducing manual follow-up.",
       exp_r1: "92% less reporting time", exp_r2: "BigQuery DWH & 4 Data Marts", exp_r3: "145M+ VND dead stock surfaced",
       exp_b7: "Benchmarked 5 forecasting architectures (ARIMA, SimpleRNN, LSTM, GRU, 1D-CNN) on 1,471 daily sessions; GRU won at RMSE 0.033, 22% better than the tuned LSTM, and dropout/early stopping lifted LSTM RMSE by 42% (0.074 to 0.042). Code: github.com/sjhinzo/TimeSeries",
       erp_eyebrow: "Enterprise Architecture", erp_title: "Problem Statement & Source ERP", erp_sub: "<strong>Problem:</strong> Operational data was scattered across isolated silos with no analytical layer. Leadership lacked trusted KPIs.<br><strong>Solution:</strong> Reverse engineered the 43-table source ERP to build a governed BigQuery Data Warehouse. The platform connects Commercial Sales, Structural Engineering, Global Supply Chain, Freight Logistics, and Financial Expenses.",
@@ -1962,10 +1977,10 @@ DIVIDE(
       dw2_t: "02 · Inventory Aging OBT Mart", dw2_d: "One Big Table (OBT) unifying stock balance, holding age (<code>aging_days</code>), 5 risk categories, and <code>Capital Tied-up Warning</code> alerts (>90d dead stock).",
       dw3_t: "03 · Project Profitability & Cost Mart", dw3_d: "Compares baseline engineering cost estimates against actual site material dispatches to calculate budget variance and flag low-margin projects (<30%).",
       dw4_t: "04 · CRM 1NF Contact Channel Mart", dw4_d: "Applies 1NF string unnesting (<code>UNNEST(SPLIT)</code>) to decompose multi-valued contact channel text into clean single-row channels for BI grouping.",
-      cs_eyebrow: "Proof Of Work", cs_title: "Case Studies & Live Dashboards", cs_sub: "4 real-world case studies extracted directly from Meridian's enterprise data. Pick a project below to see the full journey — from the Business Problem, Data Landscape, and SQL Standardization, to the Data Mart, KPI Dashboard, and recommended Next Action.",
-      csh1: "Connects the Funnel from Lead to Signed Contract & tracks product market share.", csh2: "1NF unnesting of multi-valued contact channels & customer region analysis.", csh3: "Automates 5 conversion KPIs & extracts a JSON array of nurturing interaction history.", csh4: "Builds a One Big Table to control aging dead stock & over-budget projects.",
-      tab1_s: "Funnel Sales & Market Share", tab2_s: "1NF Contact Channel Standard", tab3_s: "Conversion KPIs & JSON", tab4_s: "OBT Model & Risk",
-      cs_q: "Business Question", cs_p1: "01 · Business Problem", cs_p2: "02 · Data Landscape", cs_p3: "03 · SQL Standardization", cs_p4: "04 · Data Mart & Solution", cs_sql: "SQL Transformation Pattern", cs_sql_sub: "Google BigQuery SQL · Production-Ready", cs_p5: "05 · KPI Dashboard, Charts & Next Actions", cs_disclaimer: "Illustrative data only — names, locations, products, and figures have been anonymized.", cs_p6: "06 · Strategic Next Action", cs_note: "The SQL, data model and KPI logic are the real production ones; the figures on this page are illustrative stand-ins. Happy to walk through the live version in an interview.",
+      cs_eyebrow: "Proof Of Work", cs_title: "Case Studies & Live Dashboards", cs_sub: "5 case studies showing the same analyst workflow end-to-end: Introduction → Background → Evaluation → Proposed Solution → Recommendations. Each case connects the business problem to data, analysis, decision logic, and measurable next action.",
+      csh1: "Personal HR workforce case combining attendance, task output, performance KPI and OPEX.", csh2: "Connects the Funnel from Lead to Signed Contract & tracks product market share.", csh3: "1NF unnesting of multi-valued contact channels & customer region analysis.", csh4: "Automates conversion KPIs & extracts JSON interaction history for lead quality.", csh5: "Builds a One Big Table to control aging dead stock & over-budget projects.",
+      tab1_s: "Attendance · Performance · OPEX", tab2_s: "Funnel Sales & Market Share", tab3_s: "1NF Contact Channel Standard", tab4_s: "Conversion KPIs & JSON", tab5_s: "OBT Model & Risk",
+      cs_q: "Business Question", cs_p1: "01 · Introduction", cs_p2: "02 · Background", cs_p3: "03 · Evaluation", cs_p4: "04 · Proposed Solution", cs_p4b: "04 · Proposed Solution — KPI Dashboard & Decision Layer", cs_p5: "05 · Recommendations", cs_p6: "05 · Recommendations & Success Metrics", cs_sql: "SQL / Analysis Trace", cs_sql_sub: "BigQuery SQL · KPI Logic · Analysis", cs_disclaimer: "Illustrative data only — names, locations, products, and figures have been anonymized.", cs_note: "Case studies follow one consistent analyst workflow: Problem → Context → Evaluation → Solution → Recommendation. Production logic is shown where possible; portfolio figures are illustrative or anonymized.",
       sql_eyebrow: "Transformation Engineering", sql_title: "SQL Pipelines & Advanced Mechanics", sql_sub: "Primary Question Answered: <strong>How is raw data transformed?</strong><br>Production-grade BigQuery SQL transformations resolving 1NF normalization, JSON event parsing, currency regex scrubbing, and dynamic inventory aging math.",
       sql1_t: "1NF String Unnesting (`UNNEST(SPLIT)`)", sql1_d: "Decomposes comma-separated contact channel text (e.g. <code>\"Web, Phone, Chat\"</code>) into single-row channels for multi-channel attribution.",
       sql2_t: "JSON Event Array Extraction", sql2_d: "Extracts semi-structured JSON interaction logs from lead history fields to calculate total nurturing touchpoints per prospect.",
@@ -1987,11 +2002,11 @@ DIVIDE(
       sk1: "BI & Visualization", sk1_1: "Data Modeling", sk1_2: "KPI Dashboards", sk1_3: "Data Storytelling", sk2: "Query & Data", sk2_1: "Advanced SQL", sk2_2: "Window Functions", sk2_3: "Query Optimization", sk3: "Programming & Forecasting", sk3_1: "Time-Series Forecasting", sk4: "Spreadsheets", sk4_1: "Dynamic Arrays", sk4_2: "Conditional Formatting", sk5: "Automation & Systems", sk5_1: "Workflow Automation", sk6: "Governance & Quality", sk6_1: "Data Governance", sk6_2: "Data Monitoring", sk6_3: "Data Quality Control",
       cer_eyebrow: "Records", cer_title: "Certifications & education",
       edu_major: "Information Technology / Data Science", edu_meta: "2020 — 2024<br>Graduated with Honors",
-      hm_eyebrow: "Why Work With Me", hm_title: "Portfolio Highlights", hm_sub: "What stands out when working with me — distilled from 4 case studies and a BigQuery Data Warehouse running live in production at Meridian.",
+      hm_eyebrow: "Why Work With Me", hm_title: "Portfolio Highlights", hm_sub: "What stands out when working with me — distilled from 5 case studies and a BigQuery Data Warehouse running live in production at Meridian.",
       hm1_t: "End-to-End Thinking", hm1_d: "Not just SQL and charts — I go from understanding the business problem, to designing the data model, standardizing the pipeline, and proposing concrete actions for each KPI.",
       hm2_t: "Solid SQL & Data Modeling", hm2_d: "Hands-on building of a BigQuery Data Warehouse, 4 Star-Schema Data Marts, 1NF unnesting, and JSON event parsing on a real 43-table ERP.",
       hm3_t: "Measurable Results", hm3_d: "Reporting automation that cuts manual reporting time by over 90%, answering 20+ business questions for leadership every period.",
-      hm4_t: "Clear, Easy-to-Follow Storytelling", hm4_d: "Every case study follows the same framework: Problem → Data → SQL → Solution → Dashboard → Next Action, so readers grasp it in minutes.",
+      hm4_t: "Clear, Easy-to-Follow Storytelling", hm4_d: "Every case study follows the same framework: Introduction → Background → Evaluation → Proposed Solution → Recommendations, so the reader sees the business logic before the technology.",
       hm_ba: "Before / After", hm_before: "Before", hm_after: "After", hm_b1: "Manual Excel reporting, ~3 hrs/day", hm_a1: "<b>Power BI refresh pipeline, ~15 min/day (&minus;90%)</b>", hm_b2: "No inventory aging visibility", hm_a2: "<b>Dead stock identified and flagged: 145M+ VND</b>", hm_b3: "Sales pipeline health unclear", hm_a3: "<b>16.2% conversion tracked with stage-by-stage drop-off</b>",
       ct_eyebrow: "Get In Touch", ct_title: "Let's talk about your data", ct_desc: "Open to Data Analyst / BI roles where reporting still eats up someone's week — happy to walk through how I'd approach it.", ct_email: "Email buitiensang191@gmail.com", ct_call: "Call 0369 273 641",
       footer: "Built with Power BI logic, shipped as HTML.",
@@ -2014,14 +2029,14 @@ DIVIDE(
       r1: "Giảm Báo cáo Thủ công", r2: "KPI Chuẩn hóa & Đáng tin cậy", r3: "Dashboard Điều hành", r4: "Quyết định Kinh doanh",
       principles_head: "Nguyên tắc Kiến trúc", pri1: "• Phân tách OLTP & OLAP", pri2: "• Nguồn dữ liệu duy nhất", pri3: "• Tập trung Logic KPI", pri4: "• Mô hình SQL tái sử dụng", pri5: "• Thiết kế Star Schema",
       exp_eyebrow: "Nhật ký Công việc", exp_title: "Kinh nghiệm", exp_active: "Đang làm", exp_done: "Đã hoàn thành", exp_role1: "Kỹ sư Business Intelligence", exp_anon: "Tên công ty đã đổi ở đây · Tên thật có trên CV của tôi.", exp_role2: "Thực tập sinh Data Science",
-      exp_b1: "Thiết kế và triển khai kho dữ liệu BigQuery có quản trị cùng 4 data mart star-schema, là người duy nhất phụ trách mảng phân tích tại doanh nghiệp sản xuất B2B 25 người — hợp nhất 3 pháp nhân chạy trên web ERP do đối tác phát triển, làm việc trực tiếp với trưởng bộ phận Sales, Kho và Dự án để chốt yêu cầu.",
-      exp_b8: "Bàn giao 4 dashboard Power BI điều hành được 25+ người dùng hằng ngày — gần như toàn bộ công ty — cùng các dashboard xây cho phòng ban đối tác với hơn 50 nhân sự; mỗi dashboard đều bắt đầu từ phỏng vấn có cấu trúc với từng bộ phận về điểm nhức nhối, các bước quy trình, cấu trúc dữ liệu và ai sở hữu trường nào, trước khi bắt tay mô hình hoá.",
-      exp_b9: "Phát hiện 145M+ VNĐ hàng tồn chết qua mô hình OBT tuổi tồn kho (ngưỡng do Giám đốc Điều hành đặt: trên 90 ngày, trên 5 triệu VNĐ, 5 cấp cảnh báo) — dẫn tới việc xuống kho kiểm tra thực tế và triển khai báo giá có mục tiêu, đẩy số hàng bị gắn cờ ra lại cho khách.",
-      exp_b2: "Xây dựng pipeline dữ liệu SQL cấp độ production: áp dụng tách chuỗi 1NF (`CROSS JOIN UNNEST(SPLIT)`), trích xuất mảng JSON (`SAFE.PARSE_JSON` + `ARRAY_LENGTH`), và kiến trúc One Big Table (OBT) cho phân loại tồn kho động (&gt;90 ngày chết kho) và chênh lệch ngân sách dự án.",
-      exp_b3: "Thiết kế mô hình phân tích tự động trả lời 20+ câu hỏi kinh doanh điều hành về tỷ lệ chuyển đổi bán hàng (`kpi5_conversion_rate_pct`), lợi nhuận phân khúc khách hàng, và vốn bị khóa trong hàng tồn kho nhàn rỗi.",
+      exp_b1: "Xây dựng workflow báo cáo HR và vận hành bao phủ chấm công, đầu ra công việc, KPI hiệu suất, năng suất nhân sự và chi phí nhân công/OPEX — làm việc trực tiếp với quản lý và các phòng ban liên quan để chuyển nhu cầu báo cáo thành giải pháp dữ liệu.",
+      exp_b8: "Hợp nhất dữ liệu lương/chi phí nhân công (OPEX), chấm công và hiệu suất vào báo cáo Power BI, giúp quản lý có góc nhìn kết hợp về chi phí, năng suất và hiệu quả nhân sự thay vì theo dõi bằng các báo cáo rời rạc.",
+      exp_b9: "Theo dõi đầu ra công việc và KPI hiệu suất theo tháng của nhân viên, gồm tổng số task, tỷ lệ hoàn thành và đánh giá đạt/không đạt, phục vụ báo cáo hiệu suất và đánh giá của quản lý.",
+      exp_b2: "Thiết kế workflow đầu-cuối Web App → Google Sheets → BigQuery → Power BI để thu thập dữ liệu có cấu trúc, kiểm tra, biến đổi và phục vụ báo cáo HR/vận hành định kỳ.",
+      exp_b3: "Tự động hóa workflow báo cáo định kỳ, rút thời gian báo cáo từ khoảng 3 giờ xuống 15 phút mỗi ngày (92%, khoảng 690 giờ tiết kiệm mỗi năm) đồng thời tăng tính nhất quán của báo cáo.",
       exp_b4: "Phân tích dữ liệu KPI bằng khung cấu trúc Bài toán → Dữ liệu → Chuẩn hóa SQL → Giải pháp → Insight → Hành động tiếp theo, đưa ra các khuyến nghị hành động cho ban lãnh đạo.",
-      exp_b5: "Xây dựng logic tính toán tồn kho động (`StockIn - StockOut`) trực tiếp từ bảng chi tiết giao dịch, ngăn chặn mất dữ liệu do thiếu ID danh mục chính.",
-      exp_b6: "Cấu hình pipeline làm mới tự động ERP → BigQuery → Power BI trên kiến trúc medallion, rút thời gian báo cáo định kỳ từ 3 giờ xuống 15 phút mỗi ngày (92%, khoảng 690 giờ mỗi năm) đồng thời giám sát vận hành hằng ngày.",
+      exp_b5: "Triển khai kiểm tra chất lượng dữ liệu và validation ngay tại điểm nhập liệu để phát hiện bản ghi trùng, thiếu hoặc không nhất quán trước khi dữ liệu đi xuống dashboard và báo cáo.",
+      exp_b6: "Xây dựng logic theo dõi và báo cáo chấm công từ sự kiện check-in/check-out, chuẩn hóa dữ liệu chấm công hằng ngày cho báo cáo HR/workforce và giảm việc theo dõi thủ công.",
       exp_r1: "Giảm 92% thời gian báo cáo", exp_r2: "BigQuery DWH & 4 Data Marts", exp_r3: "145M+ VNĐ hàng tồn chết được phát hiện",
       exp_b7: "Đánh giá đối chứng 5 kiến trúc dự báo (ARIMA, SimpleRNN, LSTM, GRU, 1D-CNN) trên 1.471 phiên giao dịch; GRU tốt nhất với RMSE 0.033, hơn LSTM đã tinh chỉnh 22%; dropout và early stopping cải thiện RMSE của LSTM 42% (0.074 xuống 0.042). Mã nguồn: github.com/sjhinzo/TimeSeries",
       erp_eyebrow: "Kiến trúc Doanh nghiệp", erp_title: "Bài toán & ERP Nguồn", erp_sub: "<strong>Bài toán:</strong> Dữ liệu vận hành nằm rải rác ở các kho dữ liệu riêng lẻ không có lớp phân tích. Ban lãnh đạo thiếu các KPI đáng tin cậy.<br><strong>Giải pháp:</strong> Kỹ thuật đảo ngược 43 bảng ERP nguồn để xây dựng Kho Dữ Liệu BigQuery được quản lý. Nền tảng kết nối Bán hàng Thương mại, Kỹ thuật Cấu trúc, Chuỗi Cung Ứng Toàn Cầu, Logistics Vận Tải, và Chi phí Tài chính.",
@@ -2048,10 +2063,10 @@ DIVIDE(
       dw2_t: "02 · Mart OBT Phân loại Tồn kho", dw2_d: "One Big Table (OBT) hợp nhất số dư tồn kho, tuổi giữ hàng (<code>aging_days</code>), 5 danh mục rủi ro, và cảnh báo <code>Capital Tied-up Warning</code> (>90 ngày chết kho).",
       dw3_t: "03 · Mart Lợi nhuận & Chi phí Dự án", dw3_d: "So sánh dự toán chi phí kỹ thuật cơ sở với điều động vật tư thực tế để tính chênh lệch ngân sách và gắn cờ dự án biên thấp (&lt;30%).",
       dw4_t: "04 · Mart 1NF Kênh Liên hệ CRM", dw4_d: "Áp dụng tách chuỗi 1NF (<code>UNNEST(SPLIT)</code>) để phân rã văn bản kênh liên hệ đa giá thành các kênh một dòng sạch cho nhóm BI.",
-      cs_eyebrow: "Minh chứng Công việc", cs_title: "Dự án Thực tế & Dashboard Trực tiếp", cs_sub: "4 case study thực tế trích xuất từ dữ liệu doanh nghiệp Meridian. Chọn dự án bên dưới để xem hành trình đầy đủ — từ Bài toán Kinh doanh, Bối cảnh Dữ liệu, và Chuẩn hóa SQL, đến Data Mart, Dashboard KPI, và Hành động Tiếp theo khuyến nghị.",
-      csh1: "Kết nối Phễu từ Lead đến Hợp đồng & theo dõi thị phần sản phẩm.", csh2: "Tách 1NF kênh liên hệ đa giá & phân tích vùng khách hàng.", csh3: "Tự động 5 KPI chuyển đổi & trích xuất mảng JSON lịch sử tương tác.", csh4: "Xây One Big Table kiểm soát chết kho & dự án vượt ngân sách.",
-      tab1_s: "Sales Phễu & Thị phần", tab2_s: "Chuẩn 1NF Kênh Liên hệ", tab3_s: "KPI Chuyển đổi & JSON", tab4_s: "Mô hình OBT & Rủi ro",
-      cs_q: "Câu hỏi Kinh doanh", cs_p1: "01 · Bài toán Kinh doanh", cs_p2: "02 · Bối cảnh Dữ liệu", cs_p3: "03 · Chuẩn hóa SQL", cs_p4: "04 · Data Mart & Giải pháp", cs_sql: "Mẫu Biến đổi SQL", cs_sql_sub: "Google BigQuery SQL · Sẵn sàng Production", cs_p5: "05 · Dashboard KPI, Biểu đồ & Hành động Tiếp theo", cs_disclaimer: "Dữ liệu minh họa — tên, địa điểm, sản phẩm, và số liệu đã được ẩn danh.", cs_p6: "06 · Hành động Chiến lược Tiếp theo", cs_note: "Phần SQL, mô hình dữ liệu và logic KPI là bản production thật; các con số trên trang này là số minh hoạ. Sẵn sàng trình bày bản thật khi phỏng vấn.",
+      cs_eyebrow: "Minh chứng Công việc", cs_title: "Dự án Thực tế & Dashboard Trực tiếp", cs_sub: "5 case study trình bày cùng một quy trình phân tích đầu-cuối: Giới thiệu → Bối cảnh → Đánh giá → Giải pháp Đề xuất → Khuyến nghị. Mỗi case nối bài toán kinh doanh với dữ liệu, phân tích, logic quyết định và hành động đo lường được.",
+      csh1: "Case HR cá nhân kết hợp chấm công, đầu ra task, KPI hiệu suất và OPEX.", csh2: "Kết nối Phễu từ Lead đến Hợp đồng & theo dõi thị phần sản phẩm.", csh3: "Tách 1NF kênh liên hệ đa giá & phân tích vùng khách hàng.", csh4: "Tự động KPI chuyển đổi & trích xuất JSON lịch sử tương tác cho chất lượng lead.", csh5: "Xây One Big Table kiểm soát chết kho & dự án vượt ngân sách.",
+      tab1_s: "Chấm công · Hiệu suất · OPEX", tab2_s: "Sales Phễu & Thị phần", tab3_s: "Chuẩn 1NF Kênh Liên hệ", tab4_s: "KPI Chuyển đổi & JSON", tab5_s: "Mô hình OBT & Rủi ro",
+      cs_q: "Câu hỏi Kinh doanh", cs_p1: "01 · Giới thiệu", cs_p2: "02 · Bối cảnh", cs_p3: "03 · Đánh giá", cs_p4: "04 · Giải pháp Đề xuất", cs_p4b: "04 · Giải pháp Đề xuất — Dashboard KPI & Lớp Quyết định", cs_p5: "05 · Khuyến nghị", cs_p6: "05 · Khuyến nghị & Metric Thành công", cs_sql: "Trace SQL / Phân tích", cs_sql_sub: "BigQuery SQL · Logic KPI · Phân tích", cs_disclaimer: "Dữ liệu minh họa — tên, địa điểm, sản phẩm, và số liệu đã được ẩn danh.", cs_note: "Mọi case study theo cùng quy trình phân tích: Bài toán → Bối cảnh → Đánh giá → Giải pháp → Khuyến nghị. Logic production được trình bày khi có thể; số liệu portfolio là minh họa hoặc đã ẩn danh.",
       sql_eyebrow: "Kỹ thuật Biến đổi", sql_title: "Pipeline SQL & Kỹ thuật Nâng cao", sql_sub: "Câu hỏi chính được trả lời: <strong>Dữ liệu thô được biến đổi thế nào?</strong><br>Biến đổi SQL BigQuery cấp độ production giải quyết chuẩn hóa 1NF, phân tích sự kiện JSON, làm sạch regex tiền tệ, và tính toán tuổi tồn kho động.",
       sql1_t: "Tách chuỗi 1NF (`UNNEST(SPLIT)`)", sql1_d: "Phân rã văn bản kênh liên hệ ngăn cách bằng dấu phẩy (VD <code>\"Web, Phone, Chat\"</code>) thành các kênh một dòng để phân bổ đa kênh.",
       sql2_t: "Trích xuất Mảng Sự kiện JSON", sql2_d: "Trích xuất nhật ký tương tác JSON bán cấu trúc từ trường lịch sử lead để tính tổng số điểm chạm nuôi dưỡng cho mỗi prospect.",
@@ -2073,11 +2088,11 @@ DIVIDE(
       sk1: "BI & Trực quan hóa", sk1_1: "Mô hình hóa Dữ liệu", sk1_2: "Dashboard KPI", sk1_3: "Kể chuyện Dữ liệu", sk2: "Truy vấn & Dữ liệu", sk2_1: "SQL Nâng cao", sk2_2: "Window Functions", sk2_3: "Tối ưu Truy vấn", sk3: "Lập trình & Dự báo", sk3_1: "Dự báo Chuỗi thời gian", sk4: "Bảng tính", sk4_1: "Mảng Động", sk4_2: "Định dạng Điều kiện", sk5: "Tự động hóa & Hệ thống", sk5_1: "Tự động hóa Quy trình", sk6: "Quản trị & Chất lượng", sk6_1: "Quản trị Dữ liệu", sk6_2: "Giám sát Dữ liệu", sk6_3: "Kiểm soát Chất lượng Dữ liệu",
       cer_eyebrow: "Chứng chỉ", cer_title: "Chứng nhận & học vấn",
       edu_major: "Công nghệ Thông tin / Data Science", edu_meta: "2020 — 2024<br>Tốt nghiệp Loại Giỏi",
-      hm_eyebrow: "Vì sao Chọn Tôi", hm_title: "Điểm nổi bật Portfolio", hm_sub: "Điều nổi bật khi làm việc với tôi — chưng cất từ 4 case study và Kho Dữ Liệu BigQuery chạy thực tế ở production tại Meridian.",
+      hm_eyebrow: "Vì sao Chọn Tôi", hm_title: "Điểm nổi bật Portfolio", hm_sub: "Điều nổi bật khi làm việc với tôi — chưng cất từ 5 case study và Kho Dữ Liệu BigQuery chạy thực tế ở production tại Meridian.",
       hm1_t: "Tư duy Đầu-cuối", hm1_d: "Không chỉ SQL và chart — tôi đi từ hiểu bài toán kinh doanh, thiết kế mô hình dữ liệu, chuẩn hóa pipeline, và đề xuất hành động cụ thể cho mỗi KPI.",
       hm2_t: "SQL & Mô hình Dữ liệu Vững chắc", hm2_d: "Xây dựng thực tế Kho Dữ Liệu BigQuery, 4 Data Marts Star-Schema, tách 1NF, và parse JSON event trên ERP 43 bảng thực.",
       hm3_t: "Kết quả Đo lường được", hm3_d: "Tự động hóa báo cáo cắt thời gian báo cáo thủ công hơn 90%, trả lời 20+ câu hỏi kinh doanh cho lãnh đạo mỗi kỳ.",
-      hm4_t: "Kể chuyện Rõ ràng, Dễ theo dõi", hm4_d: "Mọi case study theo cùng khung: Bài toán → Dữ liệu → SQL → Giải pháp → Dashboard → Hành động Tiếp theo, để người đọc nắm trong vài phút.",
+      hm4_t: "Kể chuyện Rõ ràng, Dễ theo dõi", hm4_d: "Mọi case study theo cùng khung: Giới thiệu → Bối cảnh → Đánh giá → Giải pháp Đề xuất → Khuyến nghị, để người đọc thấy logic kinh doanh trước công nghệ.",
       hm_ba: "Trước / Sau", hm_before: "Trước", hm_after: "Sau", hm_b1: "Báo cáo Excel thủ công, ~3 giờ/ngày", hm_a1: "<b>Pipeline làm mới Power BI, ~15 phút/ngày (&minus;90%)</b>", hm_b2: "Không nhìn thấy tuổi tồn kho", hm_a2: "<b>Chết kho nhận diện và gắn cờ: 145M+ VND</b>", hm_b3: "Sức khỏe pipeline sales không rõ", hm_a3: "<b>16.2% chuyển đổi theo dõi với rớt từng giai đoạn</b>",
       ct_eyebrow: "Liên hệ", ct_title: "Hãy nói về dữ liệu của bạn", ct_desc: "Sẵn sàng cho vị trí Data Analyst / BI nơi báo cáo vẫn ăn hết tuần của ai đó — sẵn lòng đi qua cách tôi tiếp cận nó.", ct_email: "Email buitiensang191@gmail.com", ct_call: "Gọi 0369 273 641",
       footer: "Xây bằng logic Power BI, xuất bản dưới dạng HTML.",
@@ -2141,6 +2156,82 @@ DIVIDE(
     };
 
     const CASE_STUDIES = {
+      hr: {
+        dashTitle: { en: 'HR Workforce Analytics — Personal Portfolio Project', vn: 'Phân tích Nhân sự & Năng suất — Dự án Cá nhân' },
+        businessQuestion: { en: "How can HR and management see attendance, workload, performance, and people cost in one place — and identify who needs attention?", vn: "Làm sao HR và quản lý nhìn được chấm công, khối lượng công việc, hiệu suất và chi phí nhân sự trên một nơi — đồng thời biết ai cần được chú ý?" },
+        usedBy: { en: 'Personal portfolio case; designed for HR / Operations management review', vn: 'Case study cá nhân; thiết kế cho HR / quản lý vận hành' },
+        intro: {
+          en: 'A personal HR analytics project built to turn fragmented workforce tracking into a decision-ready reporting layer. Expected outcome: one trusted view of headcount, attendance, task output, performance evaluation, and OPEX so management can move from manual checking to evidence-based workforce decisions.',
+          vn: 'Dự án HR Analytics cá nhân nhằm biến việc theo dõi nhân sự rời rạc thành một lớp báo cáo sẵn sàng cho quyết định. Mục tiêu: một góc nhìn thống nhất về headcount, chấm công, đầu ra công việc, đánh giá hiệu suất và OPEX để quản lý ra quyết định dựa trên dữ liệu thay vì kiểm tra thủ công.'
+        },
+        background: {
+          en: 'Scope covers 48 employees with attendance events, task assignments/results, employee evaluation, salary-related OPEX, department, age band, gender and education attributes. Attendance rule: a full workday is counted when check-in is ≤08:00 and check-out is ≥18:00. Task data is aggregated monthly to calculate total tasks, completion rate and pass/fail evaluation.',
+          vn: 'Phạm vi gồm 48 nhân viên với dữ liệu chấm công, giao việc/kết quả task, đánh giá nhân viên, OPEX liên quan đến lương, phòng ban, nhóm tuổi, giới tính và học vấn. Quy tắc chấm công: tính 1 công khi check-in ≤08:00 và check-out ≥18:00. Dữ liệu task được tổng hợp theo tháng để tính tổng task, tỷ lệ hoàn thành và đánh giá đạt/không đạt.'
+        },
+        evaluation: {
+          en: 'Analysis combines workforce size, attrition, attendance discipline, workload and cost. The dashboard surfaces 10.42% attrition (5 of 48 employees), 43 active employees and average age 40, then compares task volume and completion against OPEX to identify productivity/cost patterns rather than treating HR metrics as isolated charts.',
+          vn: 'Phân tích kết hợp quy mô nhân sự, nghỉ việc, kỷ luật chấm công, khối lượng công việc và chi phí. Dashboard cho thấy attrition 10,42% (5/48 nhân viên), 43 nhân viên đang hoạt động và tuổi trung bình 40; sau đó đối chiếu khối lượng task và tỷ lệ hoàn thành với OPEX để tìm quan hệ năng suất/chi phí thay vì xem KPI HR như các chart rời rạc.'
+        },
+        solution: {
+          en: 'Built the reporting flow as Web App → Google Sheets → BigQuery → Power BI. The web app captures attendance and task events, Sheets acts as the operational store, BigQuery standardizes analytical data, and Power BI provides the management layer. Power BI is the presentation choice for KPI status/trend indicators where the dashboard needs clear increase/decrease signals.',
+          vn: 'Xây pipeline Web App → Google Sheets → BigQuery → Power BI. Web App thu nhận dữ liệu chấm công và task, Sheets đóng vai trò kho vận hành, BigQuery chuẩn hóa dữ liệu phân tích, và Power BI là lớp báo cáo quản trị. Chọn Power BI cho phần KPI status/trend vì dashboard cần thể hiện rõ tín hiệu tăng/giảm.'
+        },
+        recommendation: {
+          en: 'Use four core performance KPIs — Total Tasks, Completion Rate, Pass/Fail Evaluation and Task Output — alongside OPEX per employee. Prioritize follow-up on employees/teams with low completion but high cost, review attendance exceptions, and use salary-vs-output charts to support workload balancing and workforce planning. Success should be measured by improved completion rate, fewer attendance exceptions, and lower reporting effort.',
+          vn: 'Dùng 4 KPI hiệu suất cốt lõi — Tổng Task, Tỷ lệ Hoàn thành, Đánh giá Đạt/Không đạt và Đầu ra Task — kết hợp OPEX trên mỗi nhân viên. Ưu tiên theo dõi nhân viên/team có tỷ lệ hoàn thành thấp nhưng chi phí cao, rà soát ngoại lệ chấm công, và dùng chart lương-vs-đầu ra để cân bằng workload và lập kế hoạch nhân sự. Hiệu quả nên được đo bằng tỷ lệ hoàn thành tăng, ngoại lệ chấm công giảm và thời gian làm báo cáo giảm.'
+        },
+        // Keep these aliases so the existing case-study renderer can still support the legacy schema.
+        problem: { en: 'Workforce data was fragmented across attendance, task tracking, evaluation and cost records, making it difficult to connect people cost with actual output.', vn: 'Dữ liệu nhân sự bị phân tán giữa chấm công, giao việc, đánh giá và chi phí, khiến việc nối chi phí nhân sự với đầu ra thực tế trở nên khó khăn.' },
+        data: { en: 'Personal project dataset covering 48 employees, attendance events, monthly tasks, evaluation results, salary/OPEX and demographic dimensions.', vn: 'Bộ dữ liệu dự án cá nhân gồm 48 nhân viên, sự kiện chấm công, task theo tháng, kết quả đánh giá, lương/OPEX và các chiều nhân khẩu học.' },
+        sql: { en: 'Standardized attendance timestamps, derived full-day attendance from the business rule, aggregated task output by employee/month, and joined workforce cost to performance metrics for analysis.', vn: 'Chuẩn hóa timestamp chấm công, suy ra công đủ theo quy tắc nghiệp vụ, tổng hợp đầu ra task theo nhân viên/tháng và nối chi phí nhân sự với KPI hiệu suất để phân tích.' },
+        nextAction: { en: 'Set threshold alerts for low completion, attendance exceptions and high OPEX-to-output ratios; review flagged employees with their manager before changing workload or staffing.', vn: 'Đặt cảnh báo cho tỷ lệ hoàn thành thấp, ngoại lệ chấm công và tỷ lệ OPEX/đầu ra cao; review nhân viên bị gắn cờ với quản lý trước khi thay đổi workload hoặc nhân sự.' },
+        sqlPreview: `-- HR WORKFORCE ANALYTICS: ATTENDANCE + TASK + OPEX
+WITH attendance AS (
+  SELECT
+    employee_id,
+    DATE(check_in) AS work_date,
+    CASE
+      WHEN TIME(check_in) <= TIME '08:00:00'
+       AND TIME(check_out) >= TIME '18:00:00'
+      THEN 1 ELSE 0
+    END AS full_day_flag
+  FROM hr_attendance
+),
+monthly_task AS (
+  SELECT
+    employee_id,
+    DATE_TRUNC(task_date, MONTH) AS month,
+    COUNT(*) AS total_tasks,
+    COUNTIF(status = 'Completed') AS completed_tasks,
+    SAFE_DIVIDE(COUNTIF(status = 'Completed'), COUNT(*)) AS completion_rate
+  FROM hr_tasks
+  GROUP BY employee_id, month
+)
+SELECT
+  e.employee_id,
+  e.employee_name,
+  t.month,
+  t.total_tasks,
+  t.completion_rate,
+  e.salary_opex,
+  CASE WHEN t.completion_rate >= 0.8 THEN 'Pass' ELSE 'Fail' END AS performance_result
+FROM employees e
+LEFT JOIN monthly_task t USING (employee_id);`,
+        kpis: [
+          { label:{ en:'Overall Employees', vn:'Tổng Nhân viên' }, value:'48', color:'blue', insight:{ en:'The portfolio dataset covers 48 employees across the workforce dimensions shown below.', vn:'Bộ dữ liệu portfolio gồm 48 nhân viên theo các chiều nhân sự bên dưới.' }, action:{ en:'Use headcount as the base denominator for every workforce KPI.', vn:'Dùng headcount làm mẫu số nền cho các KPI nhân sự.' } },
+          { label:{ en:'Attrition Rate', vn:'Tỷ lệ Nghỉ việc' }, value:'10.42%', color:'rose', insight:{ en:'5 employees exited out of 48 in the illustrated dataset.', vn:'5 nhân viên nghỉ việc trên tổng 48 nhân viên trong bộ dữ liệu minh họa.' }, action:{ en:'Break attrition down by age, department and performance before taking action.', vn:'Phân rã attrition theo tuổi, phòng ban và hiệu suất trước khi hành động.' } },
+          { label:{ en:'Active Employees', vn:'Nhân viên Đang làm' }, value:'43', color:'teal', insight:{ en:'43 of 48 employees remain active in the illustrated snapshot.', vn:'43/48 nhân viên đang hoạt động trong snapshot minh họa.' }, action:{ en:'Track active headcount together with task workload to detect capacity gaps.', vn:'Theo dõi headcount đang làm cùng workload task để phát hiện thiếu/dư năng lực.' } },
+          { label:{ en:'Average Age', vn:'Tuổi Trung bình' }, value:'40', color:'violet', insight:{ en:'Average age provides context for workforce mix and attrition patterns.', vn:'Tuổi trung bình giúp đặt bối cảnh cho cơ cấu nhân sự và mô hình nghỉ việc.' }, action:{ en:'Compare attrition and workload by age band rather than using age alone.', vn:'So sánh attrition và workload theo nhóm tuổi thay vì nhìn tuổi riêng lẻ.' } }
+        ],
+        charts: [
+          { type:'doughnut', head:{ en:'Department-wise Attrition', vn:'Nghỉ việc theo Phòng ban' }, labels:['R&D','HR','Sales'], data:[3,1,1], action:{ en:'R&D carries the largest share of exits in the illustrated dataset — review workload and retention drivers there first.', vn:'R&D chiếm tỷ trọng nghỉ việc lớn nhất trong dữ liệu minh họa — ưu tiên review workload và nguyên nhân giữ chân tại đây.' } },
+          { type:'bar', head:{ en:'Employees by Age Group & Gender', vn:'Nhân viên theo Nhóm tuổi & Giới tính' }, labels:['Under 25','25–34','35–44','45–54','Over 55'], datasets:[{ label:'Female', data:[1,5,10,2,1] },{ label:'Male', data:[0,9,12,2,0] }], xLabel:'Age Group', yLabel:'Employees', action:{ en:'The 35–44 group is the largest cohort — use it as the baseline when comparing workload and attrition.', vn:'Nhóm 35–44 là cohort lớn nhất — dùng làm baseline khi so sánh workload và attrition.' } },
+          { type:'bar', head:{ en:'Task Output by Employee', vn:'Đầu ra Task theo Nhân viên' }, labels:['Top 1','Top 2','Top 3','Top 4'], data:[42,37,34,31], xLabel:'Employee Rank', yLabel:'Completed Tasks', action:{ en:'Compare high task volume with completion quality so raw output is not mistaken for strong performance.', vn:'Đối chiếu volume task cao với chất lượng hoàn thành để không nhầm số lượng với hiệu suất.' } },
+          { type:'line', head:{ en:'Monthly Completion Rate', vn:'Tỷ lệ Hoàn thành theo Tháng' }, labels:['Jan','Feb','Mar','Apr','May','Jun'], datasets:[{ label:'Completion Rate', data:[78,81,76,84,87,89] }], xLabel:'Month', yLabel:'Completion Rate (%)', action:{ en:'The upward trend is the primary success metric — keep the same KPI definition month to month.', vn:'Xu hướng tăng là metric thành công chính — giữ nguyên định nghĩa KPI giữa các tháng.' } },
+          { type:'bar', head:{ en:'Salary / OPEX vs Task Output', vn:'Lương / OPEX so với Đầu ra Task' }, labels:['Employee A','Employee B','Employee C','Employee D'], data:[18,16,14,12], xLabel:'Employee', yLabel:'OPEX (M VND)', action:{ en:'High-cost / low-output employees deserve a review of role scope, workload and task assignment before any conclusion.', vn:'Nhân viên chi phí cao nhưng đầu ra thấp cần review scope, workload và phân công trước khi kết luận.' } },
+          { type:'doughnut', head:{ en:'Performance Evaluation: Pass vs Fail', vn:'Đánh giá Hiệu suất: Đạt vs Không đạt' }, labels:['Pass','Fail'], data:[35,13], action:{ en:'Use Pass/Fail as a screening signal, then inspect the underlying task completion and evaluation criteria.', vn:'Dùng Đạt/Không đạt như tín hiệu sàng lọc, sau đó xem task completion và tiêu chí đánh giá bên dưới.' } }
+        ]
+      },
       sales: {
         dashTitle: { en: 'Commercial Funnel & Market Demand — Meridian Workspace', vn: 'Phễu Thương mại & Nhu cầu Thị trường — Meridian Workspace' },
         businessQuestion: { en: "What % of quotations convert to signed contracts, and where in the funnel do we lose the most deals?", vn: "% báo giá nào chuyển thành hợp đồng ký, và đâu trong phễu chúng ta mất nhiều deal nhất?" },
@@ -2328,6 +2419,9 @@ UNION ALL ... -- STOCK_IN, STOCK_OUT, PROJECT_VARIANCE`,
       'New Customers':'Khách hàng mới','Leads':'Lead','Conversion Rate (%)':'Tỷ lệ chuyển đổi (%)',
       'Quotations':'Báo giá','New Accounts':'Tài khoản mới','Value (M VND)':'Giá trị (triệu VNĐ)',
       'Usage Share (%)':'Tỷ trọng sử dụng (%)',
+      'Age Group':'Nhóm tuổi','Employees':'Nhân viên','Employee Rank':'Xếp hạng nhân viên',
+      'Completed Tasks':'Task hoàn thành','Completion Rate (%)':'Tỷ lệ hoàn thành (%)',
+      'Employee':'Nhân viên','OPEX (M VND)':'OPEX (triệu VNĐ)',
       'Customer Count':'Số khách hàng','Account Count':'Số tài khoản','Lead Count':'Số lead',
       'Stock-in Value':'Giá trị nhập','Stock-out Value':'Giá trị xuất','Dead Stock Value':'Giá trị hàng chết',
       // nhãn danh mục
@@ -2470,20 +2564,25 @@ UNION ALL ... -- STOCK_IN, STOCK_OUT, PROJECT_VARIANCE`,
 
     function renderCase(key){
       const c = CASE_STUDIES[key];
+      const intro = c.intro || c.problem;
+      const background = c.background || c.data;
+      const evaluation = c.evaluation || c.sql;
+      const recommendation = c.recommendation || c.nextAction;
       if(document.getElementById('csBusinessQuestion')) document.getElementById('csBusinessQuestion').textContent = c.businessQuestion[currentLang];
-      if(document.getElementById('csProblem')) document.getElementById('csProblem').textContent = c.problem[currentLang];
-      if(document.getElementById('csData')) document.getElementById('csData').textContent = c.data[currentLang];
-      if(document.getElementById('csSql')) document.getElementById('csSql').textContent = c.sql[currentLang];
+      if(document.getElementById('csIntro')) document.getElementById('csIntro').textContent = intro[currentLang];
+      if(document.getElementById('csBackground')) document.getElementById('csBackground').textContent = background[currentLang];
+      if(document.getElementById('csEvaluation')) document.getElementById('csEvaluation').textContent = evaluation[currentLang];
       if(document.getElementById('csSolution')) document.getElementById('csSolution').textContent = c.solution[currentLang];
+      if(document.getElementById('csRecommendation')) document.getElementById('csRecommendation').textContent = recommendation[currentLang];
       if(document.getElementById('csSqlPreview')) document.getElementById('csSqlPreview').textContent = c.sqlPreview;
-      if(document.getElementById('csNextAction')) document.getElementById('csNextAction').textContent = c.nextAction[currentLang];
+      if(document.getElementById('csNextAction')) document.getElementById('csNextAction').textContent = recommendation[currentLang];
       if(document.getElementById('csDashTitle')) document.getElementById('csDashTitle').textContent = c.dashTitle[currentLang];
       if(document.getElementById('csUsedBy')) document.getElementById('csUsedBy').textContent = (currentLang==='vn' ? 'Người dùng: ' : 'Used by: ') + c.usedBy[currentLang];
       renderKpis(c.kpis);
       renderChartsGrouped(c.charts);
     }
 
-    const CASE_ORDER = ['sales','client','customer','production'];
+    const CASE_ORDER = ['hr','sales','client','customer','production'];
     const csTabs = Array.from(document.querySelectorAll('.cs-tab'));
     const csPanel = document.getElementById('csPanel');
     const csPagerLabel = document.getElementById('csPagerLabel');
@@ -2598,12 +2697,20 @@ UNION ALL ... -- STOCK_IN, STOCK_OUT, PROJECT_VARIANCE`,
     'CRM & Segmentation':'CRM & Phân khúc',
     'Lead Quality':'Chất lượng Lead',
     'Inventory & Budget':'Tồn kho & Ngân sách',
-    '01 · Commercial Funnel':'01 · Phễu Thương mại',
-    '02 · CRM & Segmentation':'02 · CRM & Phân khúc',
-    '03 · Lead Quality':'03 · Chất lượng Lead',
-    '04 · Inventory & Budget (OBT)':'04 · Tồn kho & Ngân sách (OBT)',
+    'HR Workforce Analytics':'Phân tích Nhân sự & Năng suất',
+    '01 · HR Workforce Analytics':'01 · Phân tích Nhân sự & Năng suất',
+    '02 · Commercial Funnel':'02 · Phễu Thương mại',
+    '03 · CRM & Segmentation':'03 · CRM & Phân khúc',
+    '04 · Lead Quality':'04 · Chất lượng Lead',
+    '05 · Inventory & Budget (OBT)':'05 · Tồn kho & Ngân sách (OBT)',
     '← Prev':'← Trước', 'Next →':'Sau →',
-    'Live Dashboard — Meridian Data Mart':'Dashboard trực tiếp — Meridian Data Mart'
+    'Live Dashboard — Meridian Data Mart':'Dashboard trực tiếp — Meridian Data Mart',
+    'HR Workforce Analytics':'Phân tích Nhân sự & Năng suất',
+    '01 · HR Workforce Analytics':'01 · Phân tích Nhân sự & Năng suất',
+    '02 · Commercial Funnel':'02 · Phễu Thương mại',
+    '03 · CRM & Segmentation':'03 · CRM & Phân khúc',
+    '04 · Lead Quality':'04 · Chất lượng Lead',
+    '05 · Inventory & Budget':'05 · Tồn kho & Ngân sách'
   };
   var SEL = '.arch-badge, .exp-dates, .exp-company, .skip-link, .table-matrix b, .edu-card h3, .hero-meta span, .result-chip, .cs-tab-name, .cs-pager-btn, .cs-highlight-label, .demo-title';
   function applyStaticVN(){
